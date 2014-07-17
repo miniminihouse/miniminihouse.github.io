@@ -1,7 +1,8 @@
 node_modules
 app/bower_components
-dist
-.sass_cache
+app/styles/*.css
+app/styles/*.css.map
 .tmp
+.sass-cache
+*.swp
 .DS_Store
-.*swp
