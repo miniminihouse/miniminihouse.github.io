@@ -98,15 +98,6 @@ Then, access `http://localhost:9000/` from Chrome, or excute `grunt open` comman
 Open Chrome dev tools.
 
 
-### Test
-
-Unit and End-to-End test automation.
-
-```sh
-$ grunt test
-```
-
-
 ### Build
 
 Build deployable package.
