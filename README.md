@@ -109,5 +109,6 @@ $ grunt build
 To deploy the dist directory, run the subtree push command from the root directory.
 
 ``` sh
-$ git subtree push --prefix dist origin gh-pages
+$ git push origin :master # if push rejected
+$ git subtree push --prefix dist origin master
 ```
