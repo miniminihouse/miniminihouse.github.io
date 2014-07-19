@@ -3,41 +3,89 @@
 var CONNECT_PORT = 9001;
 var LIVERELOAD_PORT = 35731;
 
+
 module.exports = function(grunt) {
   require('load-grunt-tasks')(grunt);
+
+  var rewriteRulesSnippet = require('grunt-connect-rewrite/lib/utils').rewriteRequest;
 
   // Project configuration.
   grunt.initConfig({
     // Read JSON metadata stored in package.json. (optional)
     pkg: grunt.file.readJSON('package.json'),
 
+    configureRewriteRules: {
+      options: {
+        rulesProvider: 'connect.rules'
+      }
+    },
+
     connect: {
       options: {
         hostname: '0.0.0.0'
       },
+      rules: [
+        { from: 'profile$', to: '/' },
+        { from: 'portfolio$', to: '/' },
+        { from: 'contact$', to: '/' }
+      ],
       livereload: {
         options: {
           port: CONNECT_PORT,
-          middleware: function(connect) {
+          middleware: function(connect, options) {
             var path = require('path');
-            return [
+
+            var middlewares = [];
+
+            middlewares.push(rewriteRulesSnippet);
+
+            if (!Array.isArray(options.base)) {
+              options.base = [options.base];
+            }
+
+            var directory = options.directory || options.base[options.base.length - 1];
+
+            options.base.forEach(function (base) {
+              // Serve static files.
+              middlewares.push(connect.static(base));
+            });
+
+            middlewares.push( 
               require('connect-livereload')({
                 hostname: '0.0.0.0',
                 port: LIVERELOAD_PORT
-              }),
-              connect.static(path.resolve('app'))
-            ]
+              })
+            );
+
+            middlewares.push(connect.static(path.resolve('app')));
+
+            return middlewares;
           }
         }
       },
       dist: {
         options: {
           port: CONNECT_PORT,
-          middleware: function (connect) {
+          middleware: function (connect, options) {
             var path = require('path');
-            return [
-              connect.static(path.resolve('dist'))
-            ];
+            var middlewares = [];
+
+            middlewares.push(rewriteRulesSnippet);
+
+            if (!Array.isArray(options.base)) {
+              options.base = [options.base];
+            }
+
+            var directory = options.directory || options.base[options.base.length - 1];
+
+            options.base.forEach(function (base) {
+              // Serve static files.
+              middlewares.push(connect.static(base));
+            });
+
+            middlewares.push(connect.static(path.resolve('dist')));
+
+            return middlewares;
           }
         }
       }
@@ -171,9 +219,13 @@ module.exports = function(grunt) {
     var tasks = [];
     
     if (target === 'dist') {
-      tasks = ['connect:dist:keepalive'];
+      tasks = [
+        'configureRewriteRules',
+        'connect:dist:keepalive'
+      ];
     } else {
       tasks = [
+        'configureRewriteRules',
         'connect:livereload', 
         'shell:sassWatch',
         'watch'
