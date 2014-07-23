@@ -5,7 +5,46 @@
 // =============================================================================
 
 @import "compass";
+
+// =====================================
+// Non Imported Compass Modules
+// (http://beta.compass-style.org/reference/compass/)
+// =====================================
+
+// Compass Layout (http://compass-style.org/reference/compass/layout/)
+@import "compass/layout/sticky-footer";
 @import "compass/layout/stretching";
+
+// Compass Reset (http://compass-style.org/reference/compass/reset/)
+@import "compass/reset"; // == @include global-reset;
+@import "compass/reset/utilities";
+
+// Flexbox (http://beta.compass-style.org/reference/compass/css3/flexbox/)
+@import "compass/css3/flexbox";
+
+// =====================================
+// Compass Plugins
+// =====================================
+
+// Susy (http://susy.oddbird.net/)
+@import "susy";
+
+// Breakpoint (http://breakpoint-sass.com/)
+@import "breakpoint";
+
+// =============================================================================
+// Mixins
+// =============================================================================
+
+// =====================================
+// Layout
+// =====================================
+
+@mixin horizontal-box {
+  @include flexbox((display: box, box-orient: vertical), $version: 1);
+  @include flexbox((display: flexbox, flex-direction: row), $version: 2);
+  @include flexbox((display: flex, flex-direction: row));
+}
 
 // =============================================================================
 // Fonts
@@ -16,20 +55,36 @@
 // =============================================================================
 
 // =============================================================================
-// Main style
+// Layout
 // =============================================================================
+
+// =============================================================================
+// Style
+// =============================================================================
+
+html {
+  font-size: 62.5%;
+}
 
 // =====================================
 // Root container
 // =====================================
 
 body{
-  background:#dbb9b7;
+  // フォント指定（参照：http://www.dtp-transit.jp/misc/web/post_1881.html）
+  font-family: Verdana, "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif; // ゴシック体
+  //font-family: "Times New Roman", "游明朝", YuMincho, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "メイリオ", Meiryo, serif;// 明朝体
+  //font-family: "Osaka－等幅", Osaka-mono, "ＭＳ ゴシック", "MS Gothic", monospace; // 等幅書体
+  //font-family: "ヒラギノ丸ゴ ProN W4", "Hiragino Maru Gothic ProN", "メイリオ", Meiryo, fantasy; // OS X限定 丸ゴシック体
+
+  // rem サポートブラウザは現在 Firefox3.6+, Chrome, Safari5, IE9+ のみ
+  // rem 非対応ブラウザの為に px も設定しておく
+  font-size: 14px;
+  font-size: 1.4rem;
 }
-#content {
-  padding:14px;
-  width:1000px;
-  margin-bottom:94px;
+
+#container {
+  overflow: hidden;
 }
 
 // =====================================
@@ -37,7 +92,17 @@ body{
 // =====================================
 
 #header {
+  padding: 28px;
+  background:#dbb9b7;
   
+  .logo {
+    a {
+      color: #b3918f;
+      font-size: 24px;
+      font-size: 2.4rem;
+      text-decoration: none;
+    }
+  }
 }
 
 // =====================================
@@ -53,5 +118,58 @@ body{
 // =====================================
 
 #footer {
+  position: fixed;
+  right: 0;
+  left: 0;
+  bottom: 0;
   
+  padding: 15px 10px;
+  
+  background: #c4a7a3;
+  
+  .copyright {
+    color: #fff;
+    font-size: 14px;
+    font-size: 1.4rem;
+    font-weight: normal;
+    
+    line-height: 18px;
+    line-height: 1.8rem;
+    
+    text-align: center;
+    
+    span {
+      white-space: nowrap;
+    }
+  }
+  
+  .sns-links {
+    list-style: none;
+    
+    position: absolute;
+    top: -(56px+30);
+    right: 30px;
+    
+    // スクリーン幅が 900px 以上だったらフッターの上端にはみ出し表示
+    @include breakpoint(900px) {
+      top: -((56px+20)/2);
+      right: 10%;
+    }
+    
+    @include horizontal-box;
+    
+    a {
+      display: block;
+      width: 56px;
+      height: 56px;
+      
+      margin: 10px;
+      
+      background: #b3918f;
+      
+      @include border-radius(56px/2);
+      
+      @include hide-text;
+    }
+  }
 }

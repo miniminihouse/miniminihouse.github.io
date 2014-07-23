@@ -37,12 +37,12 @@
     <script src="bower_components/modernizr/modernizr.js"></script>
     <!-- endbuild -->
   </head>
-
+  
   <body>
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-
+    
     <!--[if lt IE 9]>
       <script src="bower_components/es5-shim/es5-shim.js"></script>
       <script src="bower_components/json3/lib/json3.min.js"></script>
@@ -54,7 +54,8 @@
     <div id="container" ng-controller="MainCtrl">
       <!-- header -->
       <header id="header">
-        <a href="http://miniminihouse.github.io/">mini`s design house</a>
+        <h1 class="logo"><a href="/">MINI`s Design House</a></h1>
+        
         <nav>
           <button ng-click="navigate('/');">HOME</button>
           <button ng-click="navigate('/profile');">PROFILE</button>
@@ -63,33 +64,18 @@
         </nav>
       </header>
       <!-- /header -->
-
+      
       <!-- content -->
-      <div id="content" ng-view>
-        <h2 id="hitokoto">welcome</h2>
-          <h3 id="title">about</h3>
-             <p>Hayashi Minhee（ハヤシ ミンヒ）
-東京都在住   UI/UX	& グラフィックデザイナー
-
-韓国ソウルHOSEO専門学校でコンピューアニメーション専攻
-セツモードセミナーでファッションイラスト科専攻
-
-PC＆モバイルのUI/UXデザイナー
-ゲームのUIデザイン
-ガールズイラスト
-きせかえ、絵文字、ゲームコンテンツ多数
-
-2010.10~2011.7 フリーランサーデザイン外注 
-モバイル公式サイトのなどの制作
-<a class="more">> More..</a>
-              </p>
-            <img src="img/bg_chara1.png">
-          </div>
-      <!-- /content -->
-
+      <div id="content" ng-view></div>
+      
+      <!-- layout footer -->
+      <div id="layout-footer"></div>
+      
       <!-- footer -->
       <footer id="footer">
-        <p class="copyright">Copyright 2014 © MiniMini All Rights Reserved.</p>
+        <p class="copyright">
+          <span>minhee hayashi</span> <span>Copyright©since2014</span> <span>All Rights Reserved.</span>
+        </p>
         
         <ul class="sns-links">
           <li><a href="https://www.facebook.com/" target="_blank">facebook</a></li>
@@ -99,7 +85,7 @@ PC＆モバイルのUI/UXデザイナー
       <!-- /footer -->
     </div>
     <!-- /container-->
-
+    
     <!-- build:js scripts/main.min.js -->
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
