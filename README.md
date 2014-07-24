@@ -61,6 +61,18 @@ gem install listen --version "=0.7.3"
 gem install oily_png
 ```
 
+#### Install Susy
+
+```
+gem install susy
+```
+
+#### Install Breakpoint
+
+```
+gem install breakpoint
+```
+
 ## Grunt
 
 ### Install Grunt CLI
