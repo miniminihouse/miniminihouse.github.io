@@ -55,11 +55,21 @@
 // =============================================================================
 
 // =============================================================================
-// Layout
+// Configuration
 // =============================================================================
 
+// =====================================
+// Layout
+// =====================================
+
+$breakpoint-desktop: 900px; // スクリーン幅が 900px 以上だったらデスクトップ
+
+$breakpoint-tablet: 600px; // スクリーン幅が 600px 以上だったらタブレット
+
+// それ以外はモバイル（モバイルファスト！）
+
 // =============================================================================
-// Style
+// Main style
 // =============================================================================
 
 html {
@@ -83,7 +93,7 @@ body{
   font-size: 1.4rem;
 }
 
-#container {
+#main-container {
   overflow: hidden;
 }
 
@@ -92,15 +102,72 @@ body{
 // =====================================
 
 #header {
-  padding: 28px;
-  background:#dbb9b7;
+  padding: 10px;
+  
+  //background:#dbb9b7;
+  background: #666;
+  
+  @include breakpoint($breakpoint-tablet) {
+    padding: 28px;
+  }
+  
+  > .container {
+    @include container(1000px);
+  }
   
   .logo {
+    @include breakpoint($breakpoint-tablet) {
+      @include span(1 of 3);
+    }
+    
     a {
-      color: #b3918f;
-      font-size: 24px;
-      font-size: 2.4rem;
+      //color: #b3918f;
+      color: #222;
+      font-size: 36px;
+      font-size: 3.6rem;
+      font-weight: bold;
       text-decoration: none;
+    }
+  }
+  
+  .nav-buttons {
+    margin: 10px auto 0;
+    
+    @include breakpoint($breakpoint-tablet) {
+      @include span(2 of 3 last);
+      margin: 20px auto 0;
+      text-align: right;
+    }
+    
+    button {
+      display: block;
+      width: 100%;
+      
+      margin: 0 5px;
+      padding: 5px 0;
+      
+      color: #222;
+      font-size: 20px;
+      font-size: 2.0rem;
+      font-family: bold;
+      
+      line-height: 20px;
+      line-height: 2.0rem;
+      text-align: center;
+      
+      background: none;
+      border: none;
+      
+      @include breakpoint($breakpoint-tablet) {
+        display: inline-block;
+        width: auto;
+        
+        font-size: 14px;
+        font-size: 1.4rem;
+        
+        line-height: 14px;
+        line-height: 1.4rem;
+      }
     }
   }
 }
@@ -110,7 +177,12 @@ body{
 // =====================================
 
 #content {
+  @include container(1000px);
+  padding: 10px;
   
+  @include breakpoint($breakpoint-tablet) {
+    padding: 28px;
+  }
 }
 
 // =====================================
@@ -125,10 +197,12 @@ body{
   
   padding: 15px 10px;
   
-  background: #c4a7a3;
+  //background: #c4a7a3;
+  background: #666;
   
   .copyright {
-    color: #fff;
+    //color: #fff;
+    color: #999;
     font-size: 14px;
     font-size: 1.4rem;
     font-weight: normal;
@@ -150,8 +224,7 @@ body{
     top: -(56px+30);
     right: 30px;
     
-    // スクリーン幅が 900px 以上だったらフッターの上端にはみ出し表示
-    @include breakpoint(900px) {
+    @include breakpoint($breakpoint-desktop) {
       top: -((56px+20)/2);
       right: 10%;
     }
@@ -165,7 +238,8 @@ body{
       
       margin: 10px;
       
-      background: #b3918f;
+      //background: #b3918f;
+      background: #444;
       
       @include border-radius(56px/2);
       
