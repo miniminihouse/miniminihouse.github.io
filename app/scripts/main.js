@@ -42,6 +42,10 @@
 
   app.run(['$rootScope', '$location', function($rootScope, $location) {
     
+    $rootScope.$on('$routeChangeSuccess', function($event, current, previous) {
+      $rootScope.currentPath = $location.$$path;
+    });
+    
     $rootScope.navigate = function(path, search) {
       if(path) {
         $location.path(path);

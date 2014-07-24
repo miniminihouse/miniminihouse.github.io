@@ -58,10 +58,21 @@
           <h1 class="logo"><a href="/">LOGO</a></h1>
 
           <nav class="nav-buttons">
-            <button ng-click="navigate('/');">HOME</button><!--
-         --><button ng-click="navigate('/profile');">PROFILE</button><!--
-         --><button ng-click="navigate('/portfolio');">PORTFOLIO</button><!--
-         --><button ng-click="navigate('/contact');">CONTACT</button>
+            <button ng-class="{selected: currentPath == '/'}"
+                    ng-disabled="currentPath == '/'"
+                    ng-click="navigate('/');">HOME</button><!--
+                    
+         --><button ng-class="{selected: currentPath == '/profile'}"
+                    ng-disabled="currentPath == '/profile'"
+                    ng-click="navigate('/profile');">PROFILE</button><!--
+                    
+         --><button ng-class="{selected: currentPath == '/portfolio'}"
+                    ng-disabled="currentPath == '/portfolio'"
+                    ng-click="navigate('/portfolio');">PORTFOLIO</button><!--
+                    
+         --><button ng-class="{selected: currentPath == '/contact'}"
+                    ng-disabled="currentPath == '/contact'"
+                    ng-click="navigate('/contact');">CONTACT</button>
           </nav>
         </div>
       </header>
@@ -72,14 +83,14 @@
       
       <!-- footer -->
       <footer id="footer">
-        <p class="copyright">
-          <span>Copyright 2014 ©</span> <span>All Rights Reserved.</span>
-        </p>
-        
-        <ul class="sns-links">
-          <li><a href="https://www.facebook.com/" target="_blank">facebook</a></li>
-          <li><a href="https://twitter.com/" target="_bank">twitter</a></li>
-        </ul>
+        <div class="container">
+          <p class="copyright">minhee hayashi Copyright©since2014 All Rights Reserved.</p>
+
+          <ul class="sns-links">
+            <li><a href="https://www.facebook.com/" target="_blank">facebook</a></li><!--
+         --><li><a href="https://twitter.com/" target="_bank">twitter</a></li>
+          </ul>
+        </div>
       </footer>
       <!-- /footer -->
     </div>

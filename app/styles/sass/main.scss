@@ -33,17 +33,43 @@
 @import "breakpoint";
 
 // =============================================================================
+// Additional reset
+// =============================================================================
+
+body {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  
+  -webkit-text-size-adjust: none;
+  
+  cursor: default;
+}
+
+button,
+a[ng-click] {
+  outline: none;
+}
+
+// =============================================================================
 // Mixins
 // =============================================================================
 
-// =====================================
-// Layout
-// =====================================
+@mixin font-size($size) {
+  // rem サポートブラウザは現在 Firefox3.6+, Chrome, Safari5, IE9+ のみ
+  // rem 非対応ブラウザの為に px も設定しておく
+  font-size: $size+px;
+  font-size: $size/10+rem;
+}
 
-@mixin horizontal-box {
-  @include flexbox((display: box, box-orient: vertical), $version: 1);
-  @include flexbox((display: flexbox, flex-direction: row), $version: 2);
-  @include flexbox((display: flex, flex-direction: row));
+@mixin line-height($size) {
+  line-height: $size+px;
+  line-height: $size/10+rem;
 }
 
 // =============================================================================
@@ -58,22 +84,34 @@
 // Configuration
 // =============================================================================
 
+$container-max-width: 960px;
+
 // =====================================
-// Layout
+// Breakpoint
 // =====================================
 
 $breakpoint-desktop: 900px; // スクリーン幅が 900px 以上だったらデスクトップ
-
 $breakpoint-tablet: 600px; // スクリーン幅が 600px 以上だったらタブレット
-
 // それ以外はモバイル（モバイルファスト！）
+
+// =====================================
+// Susy
+// =====================================
+
+$susy: (
+  global-box-sizing: border-box,
+  use-custom: (rem: true
+    )
+  );
+
+@include border-box-sizing;
 
 // =============================================================================
 // Main style
 // =============================================================================
 
 html {
-  font-size: 62.5%;
+  font-size: 62.5%; // これで 1em が 10px と同じになる
 }
 
 // =====================================
@@ -87,10 +125,7 @@ body{
   //font-family: "Osaka－等幅", Osaka-mono, "ＭＳ ゴシック", "MS Gothic", monospace; // 等幅書体
   //font-family: "ヒラギノ丸ゴ ProN W4", "Hiragino Maru Gothic ProN", "メイリオ", Meiryo, fantasy; // OS X限定 丸ゴシック体
 
-  // rem サポートブラウザは現在 Firefox3.6+, Chrome, Safari5, IE9+ のみ
-  // rem 非対応ブラウザの為に px も設定しておく
-  font-size: 14px;
-  font-size: 1.4rem;
+  @include font-size(14);
 }
 
 #main-container {
@@ -102,36 +137,34 @@ body{
 // =====================================
 
 #header {
-  padding: 10px;
-  
-  //background:#dbb9b7;
+  min-height: 50px;
   background: #666;
   
-  @include breakpoint($breakpoint-tablet) {
-    padding: 28px;
-  }
-  
   > .container {
-    @include container(1000px);
+    position: relative;
+    @include container($container-max-width);
+    @include clearfix;
   }
   
   .logo {
+    padding: 0 15px;
+    border-bottom: 1px solid #222;
+    
     @include breakpoint($breakpoint-tablet) {
       @include span(1 of 3);
     }
     
     a {
-      //color: #b3918f;
       color: #222;
-      font-size: 36px;
-      font-size: 3.6rem;
+      @include font-size(24);
       font-weight: bold;
       text-decoration: none;
+      @include line-height(50);
     }
   }
   
   .nav-buttons {
-    margin: 10px auto 0;
+    background: #999;
     
     @include breakpoint($breakpoint-tablet) {
       @include span(2 of 3 last);
@@ -140,33 +173,34 @@ body{
     }
     
     button {
-      display: block;
-      width: 100%;
+      display: inline-block;
+      width: 25%;
+      height: 50px;
       
-      margin: 0 5px;
-      padding: 5px 0;
+      margin: 0;
+      padding: 0;
       
       color: #222;
-      font-size: 20px;
-      font-size: 2.0rem;
+      @include font-size(12);
       font-family: bold;
-      
-      line-height: 20px;
-      line-height: 2.0rem;
+      @include line-height(50);
       text-align: center;
       
       background: none;
       border: none;
       
+      @include box-sizing(border-box);
+      
+      &.selected {
+        border-bottom: 6px solid #222;
+      }
+      
+      &.ng-click-active:not([disabled]) {
+        border-bottom: 6px solid #666
+      }
+      
       @include breakpoint($breakpoint-tablet) {
-        display: inline-block;
-        width: auto;
-        
-        font-size: 14px;
-        font-size: 1.4rem;
-        
-        line-height: 14px;
-        line-height: 1.4rem;
+        @include font-size(14);
       }
     }
   }
@@ -177,12 +211,24 @@ body{
 // =====================================
 
 #content {
-  @include container(1000px);
-  padding: 10px;
+  @include container($container-max-width);
   
-  @include breakpoint($breakpoint-tablet) {
-    padding: 28px;
-  }
+}
+
+#content-home {
+  
+}
+
+#content-profile {
+  
+}
+
+#content-portfolio {
+  
+}
+
+#content-contact {
+  
 }
 
 // =====================================
@@ -195,25 +241,25 @@ body{
   left: 0;
   bottom: 0;
   
-  padding: 15px 10px;
+  min-height: 22px;
   
-  //background: #c4a7a3;
   background: #666;
   
+  > .container {
+    position: relative;
+    @include container($container-max-width);
+  }
+  
   .copyright {
-    //color: #fff;
     color: #999;
-    font-size: 14px;
-    font-size: 1.4rem;
+    @include font-size(10);
     font-weight: normal;
-    
-    line-height: 18px;
-    line-height: 1.8rem;
-    
+    @include line-height(22);
     text-align: center;
     
-    span {
-      white-space: nowrap;
+    @include breakpoint($breakpoint-desktop) {
+      @include font-size(16);
+      @include line-height(44);
     }
   }
   
@@ -221,29 +267,35 @@ body{
     list-style: none;
     
     position: absolute;
-    top: -(56px+30);
-    right: 30px;
+    top: -(28px+15);
+    right: 10px;
     
     @include breakpoint($breakpoint-desktop) {
       top: -((56px+20)/2);
-      right: 10%;
     }
     
-    @include horizontal-box;
+    > li {
+      display: inline-block;
+    }
     
     a {
       display: block;
-      width: 56px;
-      height: 56px;
+      width: 28px;
+      height: 28px;
       
-      margin: 10px;
+      margin: 5px;
       
-      //background: #b3918f;
       background: #444;
-      
-      @include border-radius(56px/2);
+      @include border-radius(28px/2);
       
       @include hide-text;
+      
+      @include breakpoint($breakpoint-desktop) {
+        width: 56px;
+        height: 56px;
+        margin: 10px;
+        @include border-radius(56px/2);
+      }
     }
   }
 }
