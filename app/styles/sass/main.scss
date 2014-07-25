@@ -5,7 +5,72 @@
 // =============================================================================
 
 @import "compass";
+
+// =====================================
+// Non Imported Compass Modules
+// (http://beta.compass-style.org/reference/compass/)
+// =====================================
+
+// Compass Layout (http://compass-style.org/reference/compass/layout/)
+@import "compass/layout/sticky-footer";
 @import "compass/layout/stretching";
+
+// Compass Reset (http://compass-style.org/reference/compass/reset/)
+@import "compass/reset"; // == @include global-reset;
+@import "compass/reset/utilities";
+
+// Flexbox (http://beta.compass-style.org/reference/compass/css3/flexbox/)
+@import "compass/css3/flexbox";
+
+// =====================================
+// Compass Plugins
+// =====================================
+
+// Susy (http://susy.oddbird.net/)
+@import "susy";
+
+// Breakpoint (http://breakpoint-sass.com/)
+@import "breakpoint";
+
+// =============================================================================
+// Additional reset
+// =============================================================================
+
+body {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  
+  -webkit-text-size-adjust: none;
+  
+  cursor: default;
+}
+
+button,
+a[ng-click] {
+  outline: none;
+}
+
+// =============================================================================
+// Mixins
+// =============================================================================
+
+@mixin font-size($size) {
+  // rem サポートブラウザは現在 Firefox3.6+, Chrome, Safari5, IE9+ のみ
+  // rem 非対応ブラウザの為に px も設定しておく
+  font-size: $size+px;
+  font-size: $size/10+rem;
+}
+
+@mixin line-height($size) {
+  line-height: $size+px;
+  line-height: $size/10+rem;
+}
 
 // =============================================================================
 // Fonts
@@ -16,18 +81,56 @@
 // =============================================================================
 
 // =============================================================================
+// Configuration
+// =============================================================================
+
+$container-max-width: 960px;
+
+// =====================================
+// Breakpoint
+// (http://breakpoint-sass.com/)
+// =====================================
+
+$breakpoint-desktop: 900px; // スクリーン幅が 900px 以上だったらデスクトップ
+$breakpoint-tablet: 600px; // スクリーン幅が 600px 以上だったらタブレット
+// それ以外はモバイル（モバイルファスト！）
+
+// =====================================
+// Susy
+// (http://susy.oddbird.net/)
+// =====================================
+
+// Grid レイアウトが必要な場合は Susy が便利（今回は Grid レイアウト要らなさそう）
+$susy: (
+  global-box-sizing: border-box,
+  use-custom: (rem: true)
+);
+
+@include border-box-sizing;
+
+// =============================================================================
 // Main style
 // =============================================================================
+
+html {
+  font-size: 62.5%; // これで 1em が 10px と同じになる
+}
 
 // =====================================
 // Root container
 // =====================================
 
 body{
-  background:#dbb9b7;
+  // フォント指定（参照：http://www.dtp-transit.jp/misc/web/post_1881.html）
+  font-family: Verdana, "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif; // ゴシック体
+  //font-family: "Times New Roman", "游明朝", YuMincho, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "メイリオ", Meiryo, serif;// 明朝体
+  //font-family: "Osaka－等幅", Osaka-mono, "ＭＳ ゴシック", "MS Gothic", monospace; // 等幅書体
+  //font-family: "ヒラギノ丸ゴ ProN W4", "Hiragino Maru Gothic ProN", "メイリオ", Meiryo, fantasy; // OS X限定 丸ゴシック体
+
+  @include font-size(14);
 }
 
-#content {
+/* #content {
   padding: 14px;
   width: 1000px;
   margin-bottom: 94px;
@@ -68,7 +171,10 @@ img{
 nav{
   float: none;
   clear: both;
-  width: 100%;
+  width: 100%; */
+
+#main-container {
+  overflow: hidden;
 }
 
 // =====================================
@@ -76,21 +182,231 @@ nav{
 // =====================================
 
 #header {
+  min-height: 50px;
+  background: #666;
   
-}
+  > .container {
+    position: relative;
+    @include container($container-max-width);
+    @include clearfix;
+  }
+  
+  .logo {
+    padding: 0 15px;
+    border-bottom: 1px solid #222;
+    
+    @include breakpoint($breakpoint-tablet) {
+      @include span(1 of 3);
+    }
+    
+    a {
+      color: #222;
+      @include font-size(24);
+      font-weight: bold;
+      text-decoration: none;
+      @include line-height(50);
+    }
+  } // .logo
+  
+  .nav-buttons {
+    background: #999;
+    
+    @include breakpoint($breakpoint-tablet) {
+      @include span(2 of 3 last);
+      margin: 20px auto 0;
+      text-align: right;
+    }
+    
+    button {
+      display: inline-block;
+      width: 25%;
+      height: 50px;
+      
+      margin: 0;
+      padding: 0;
+      
+      color: #222;
+      @include font-size(12);
+      font-family: bold;
+      @include line-height(50);
+      text-align: center;
+      
+      background: none;
+      border: none;
+      
+      @include box-sizing(border-box);
+      
+      &.selected {
+        border-bottom: 6px solid #222;
+      }
+      
+      &.ng-click-active:not([disabled]) {
+        border-bottom: 6px solid #666
+      }
+      
+      @include breakpoint($breakpoint-tablet) {
+        @include font-size(14);
+      }
+    } // button
+    
+    .home {
+      
+    }
+    
+    .profile {
+      
+    }
+    
+    .portfolio {
+      
+    }
+    
+    .contact {
+      
+    }
+  } // .nav-buttons
+} // #header
 
 // =====================================
 // Content (SPA contents area)
 // =====================================
 
 #content {
+  @include container($container-max-width);
   
-}
+  .home {
+    > h2 {
+      
+    }
+    
+    article {
+      > h3 {
+        
+      }
+      
+      > p{
+        
+      }
+    }
+    
+  } // .home
+  
+  .profile {
+    > h2 {
+      
+    }
+    
+    article {
+      > h3 {
+        
+      }
+      
+      > p{
+        
+      }
+    }
+  } // .profile
+  
+  .portfolio {
+    > h2 {
+      display: none;
+    }
+    
+    .project-summary {
+      > h3 {
+        
+      }
+      
+      > p {
+        
+      }
+    } // .project-summary
+    
+    .project-thumbnail {
+      > img {
+        
+      }
+    } // .project-thumbnail
+  } // .profile
+  
+  .contact {
+    > h2 {
+      
+    }
+    
+    .contact-detail {
+      > p {
+        
+      }
+    }
+  } // .contact
+} // #content
 
 // =====================================
 // Footer
 // =====================================
 
 #footer {
+  position: fixed;
+  right: 0;
+  left: 0;
+  bottom: 0;
   
-}
+  min-height: 22px;
+  
+  background: #666;
+  
+  > .container {
+    position: relative;
+    @include container($container-max-width);
+  }
+  
+  .copyright {
+    color: #999;
+    @include font-size(10);
+    font-weight: normal;
+    @include line-height(22);
+    text-align: center;
+    
+    @include breakpoint($breakpoint-desktop) {
+      @include font-size(16);
+      @include line-height(44);
+    }
+  } // .copyright
+  
+  .sns-links {
+    list-style: none;
+    
+    position: absolute;
+    top: -(28px+15);
+    right: 10px;
+    
+    @include breakpoint($breakpoint-desktop) {
+      top: -((56px+20)/2);
+    }
+    
+    > li {
+      display: inline-block;
+    }
+    
+    a {
+      display: block;
+      width: 28px;
+      height: 28px;
+      
+      margin: 5px;
+      
+      background: #444;
+      @include border-radius(28px/2);
+      
+      @include hide-text;
+      
+      @include breakpoint($breakpoint-desktop) {
+        width: 56px;
+        height: 56px;
+        margin: 10px;
+        @include border-radius(56px/2);
+      }
+    }
+  } // .sns-links
+} // #footer

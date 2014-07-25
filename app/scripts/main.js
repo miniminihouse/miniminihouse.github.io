@@ -18,7 +18,7 @@
 
   app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
     
-    $routeProvider.when('/', { templateUrl: 'views/top.html' });
+    $routeProvider.when('/', { templateUrl: 'views/home.html' });
     $routeProvider.when('/profile', { templateUrl: 'views/profile.html' });
     $routeProvider.when('/portfolio', { templateUrl: 'views/portfolio.html' });
     $routeProvider.when('/contact', { templateUrl: 'views/contact.html' });
@@ -41,6 +41,10 @@
   //----------------------------------
 
   app.run(['$rootScope', '$location', function($rootScope, $location) {
+    
+    $rootScope.$on('$routeChangeSuccess', function($event, current, previous) {
+      $rootScope.currentPath = $location.$$path;
+    });
     
     $rootScope.navigate = function(path, search) {
       if(path) {
