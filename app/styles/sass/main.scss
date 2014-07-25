@@ -26,10 +26,49 @@
 body{
   background:#dbb9b7;
 }
+
 #content {
-  padding:14px;
-  width:1000px;
-  margin-bottom:94px;
+  padding: 14px;
+  width: 1000px;
+  margin-bottom: 94px;
+  overflow: hidden;
+}
+#hitokoto{
+  width:image-width('h1_welcome.png')/2;
+  height:image-height('h1_welcome.png')/2;
+  float:left;
+  text-indent: -9999px;
+  background:image-url('h1_welcome.png') no-repeat 0 0;
+  @include background-size(image-width('h1_welcome.png')/2 image-height('h1_welcome.png')/2);
+  margin-bottom:100px;
+}
+
+#title{
+  width:502px;
+  height:45px;
+  float:left;
+  text-indent: -9999px;
+  background:url(../img/h2_about.png) no-repeat 0 0;
+}
+
+img{
+  width:498px;
+  float:right;
+  margin-left:20px;
+}
+#header a{
+  display:block;
+  background:url(../img/logo.png) no-repeat 0 0;
+  width:100%; 
+  height:100%;
+  border-bottom: 0;
+  text-indent: -9999px;
+  margin-bottom:20px; margin-top:30px;
+}
+nav{
+  float: none;
+  clear: both;
+  width: 100%;
 }
 
 // =====================================
