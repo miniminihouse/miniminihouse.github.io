@@ -58,19 +58,23 @@
           <h1 class="logo"><a href="/">LOGO</a></h1>
 
           <nav class="nav-buttons">
-            <button ng-class="{selected: currentPath == '/'}"
+            <button class="home"
+                    ng-class="{selected: currentPath == '/'}"
                     ng-disabled="currentPath == '/'"
                     ng-click="navigate('/');">HOME</button><!--
                     
-         --><button ng-class="{selected: currentPath == '/profile'}"
+         --><button class="profile"
+                    ng-class="{selected: currentPath == '/profile'}"
                     ng-disabled="currentPath == '/profile'"
                     ng-click="navigate('/profile');">PROFILE</button><!--
                     
-         --><button ng-class="{selected: currentPath == '/portfolio'}"
+         --><button class="portfolio"
+                    ng-class="{selected: currentPath == '/portfolio'}"
                     ng-disabled="currentPath == '/portfolio'"
                     ng-click="navigate('/portfolio');">PORTFOLIO</button><!--
                     
-         --><button ng-class="{selected: currentPath == '/contact'}"
+         --><button class="contact"
+                    ng-class="{selected: currentPath == '/contact'}"
                     ng-disabled="currentPath == '/contact'"
                     ng-click="navigate('/contact');">CONTACT</button>
           </nav>

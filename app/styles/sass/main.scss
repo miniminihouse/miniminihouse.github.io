@@ -88,6 +88,7 @@ $container-max-width: 960px;
 
 // =====================================
 // Breakpoint
+// (http://breakpoint-sass.com/)
 // =====================================
 
 $breakpoint-desktop: 900px; // スクリーン幅が 900px 以上だったらデスクトップ
@@ -96,13 +97,14 @@ $breakpoint-tablet: 600px; // スクリーン幅が 600px 以上だったらタ�
 
 // =====================================
 // Susy
+// (http://susy.oddbird.net/)
 // =====================================
 
+// Grid レイアウトが必要な場合は Susy が便利（今回は Grid レイアウト要らなさそう）
 $susy: (
   global-box-sizing: border-box,
-  use-custom: (rem: true
-    )
-  );
+  use-custom: (rem: true)
+);
 
 @include border-box-sizing;
 
@@ -161,7 +163,7 @@ body{
       text-decoration: none;
       @include line-height(50);
     }
-  }
+  } // .logo
   
   .nav-buttons {
     background: #999;
@@ -202,9 +204,25 @@ body{
       @include breakpoint($breakpoint-tablet) {
         @include font-size(14);
       }
+    } // button
+    
+    .home {
+      
     }
-  }
-}
+    
+    .profile {
+      
+    }
+    
+    .portfolio {
+      
+    }
+    
+    .contact {
+      
+    }
+  } // .nav-buttons
+} // #header
 
 // =====================================
 // Content (SPA contents area)
@@ -213,23 +231,73 @@ body{
 #content {
   @include container($container-max-width);
   
-}
-
-#home {
+  .home {
+    > h2 {
+      
+    }
+    
+    article {
+      > h3 {
+        
+      }
+      
+      > p{
+        
+      }
+    }
+    
+  } // .home
   
-}
-
-#profile {
+  .profile {
+    > h2 {
+      
+    }
+    
+    article {
+      > h3 {
+        
+      }
+      
+      > p{
+        
+      }
+    }
+  } // .profile
   
-}
-
-#portfolio {
+  .portfolio {
+    > h2 {
+      display: none;
+    }
+    
+    .project-summary {
+      > h3 {
+        
+      }
+      
+      > p {
+        
+      }
+    } // .project-summary
+    
+    .project-thumbnail {
+      > img {
+        
+      }
+    } // .project-thumbnail
+  } // .profile
   
-}
-
-#contact {
-  
-}
+  .contact {
+    > h2 {
+      
+    }
+    
+    .contact-detail {
+      > p {
+        
+      }
+    }
+  } // .contact
+} // #content
 
 // =====================================
 // Footer
@@ -261,7 +329,7 @@ body{
       @include font-size(16);
       @include line-height(44);
     }
-  }
+  } // .copyright
   
   .sns-links {
     list-style: none;
@@ -297,5 +365,5 @@ body{
         @include border-radius(56px/2);
       }
     }
-  }
-}
+  } // .sns-links
+} // #footer
