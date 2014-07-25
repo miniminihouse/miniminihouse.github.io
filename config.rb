@@ -30,3 +30,10 @@ javascripts_dir = "app/styles"
 
 # Enable CSS source maps
 sourcemap = true
+
+# Set cash busting function with MD5 hash
+asset_cache_buster do |http_path, real_path|
+  if File.exists?(real_path)
+    Digest::MD5.file(real_path.path).hexdigest[0,8]
+  end
+end
