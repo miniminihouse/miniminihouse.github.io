@@ -154,6 +154,7 @@ body{
     
     @include breakpoint($breakpoint-tablet) {
       @include span(1 of 3);
+      border-bottom: none;
     }
     
     a {
@@ -162,6 +163,11 @@ body{
       font-weight: bold;
       text-decoration: none;
       @include line-height(50);
+      
+      @include breakpoint($breakpoint-tablet) {
+        @include font-size(30);
+        @include line-height(70);
+      }
     }
   } // .logo
   
@@ -170,8 +176,9 @@ body{
     
     @include breakpoint($breakpoint-tablet) {
       @include span(2 of 3 last);
-      margin: 20px auto 0;
+      margin: 10px auto 0;
       text-align: right;
+      background: none;
     }
     
     button {
@@ -192,6 +199,10 @@ body{
       border: none;
       
       @include box-sizing(border-box);
+      
+      @include breakpoint($breakpoint-tablet) {
+        height: 100%;
+      }
       
       &.selected {
         border-bottom: 6px solid #222;
