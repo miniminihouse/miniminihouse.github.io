@@ -296,7 +296,7 @@ nav{
     }
     
     .portfolio {
-      
+
     }
     
     .contact {
@@ -313,19 +313,55 @@ nav{
   @include container($container-max-width);
   
   .home {
-    background:#dbb9b7;
-    > h2 {
-      
+    @include breakpoint($breakpoint-tablet) {
+      #main_image{
+      width:498px;
+      height:725px;
+      background:url(../images/top/bg_chara1.png) no-repeat;
+      display:block;
+      }
+          }
+    #main_image{
+      width:320px;
+      height:81px;
+      background:url(../images/top/sp_bg_chara1.png) no-repeat;
+      display:block;
+      }
+    background-color:#dbb9b7;
+    > h2 {margin:10px;
     }
     
     article {
-      > h3 {
-        
+      >h3 {
+        margin:7px 0px 7px 0px;
+        font-size: 20px;
+        display:block;
+        font-family: "Myriad Web Pro";
+        color: #fff;
+        padding:10px 15px 10px 15px;
+        background: -moz-linear-gradient(left,  rgba(221,168,168,1) 0%, rgba(219,185,183,0) 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(221,168,168,1)), color-stop(100%,rgba(219,185,183,0))); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(left,  rgba(221,168,168,1) 0%,rgba(219,185,183,0) 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(left,  rgba(221,168,168,1) 0%,rgba(219,185,183,0) 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(left,  rgba(221,168,168,1) 0%,rgba(219,185,183,0) 100%); /* IE10+ */
+        background: linear-gradient(to right,  rgba(221,168,168,1) 0%,rgba(219,185,183,0) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dda8a8', endColorstr='#00dbb9b7',GradientType=1 ); /* IE6-9 */
+ 
       }
       
       > p{
-        
+        color:#fff;
+        font-size:12px;
+        margin:0px 15px 10px 15px;
+        line-height:18px;
+      strong{font-weight:bold;}
       }
+      
+       .more{
+        display:block;
+        float:right;
+        margin:15px;
+        }
     }
     
   } // .home
@@ -355,6 +391,10 @@ nav{
       > h3 {
         
       }
+      ul{list-style:none;}
+      #works{height:400px; background:#f1779e;}
+        .work{margin:0 auto; width:80%; padding-top:50px;}
+        .work li{width:18%; margin:1%; background:#fff; float:left;}
       
       > p {
         
