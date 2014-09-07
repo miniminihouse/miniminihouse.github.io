@@ -312,7 +312,7 @@ nav{
 
 #content {
   @include container($container-max-width);
-  
+    
   .home {
 /*     @include breakpoint($breakpoint-tablet) {
       #main_image{
@@ -355,7 +355,7 @@ nav{
         @include background-image(linear-gradient(left,  rgba(221,168,168,1) 0%,rgba(221,168,168,0) 100%));
       }
       h4{font-weight:bold;
-      color:red;
+      color:#b29290;
       margin:0px 15px 10px 15px;
       }
       > p{
@@ -375,17 +375,27 @@ nav{
   } // .home
   
   .profile {
-    > h2 {
-      
+      > h2 {margin:10px;
     }
     
     article {
-      > h3 {
-        
+      >h3 {
+        margin:7px 0px 7px 0px;
+        font-size: 20px;
+        display:block;
+        font-family: "Myriad Web Pro";
+        color: #fff;
+        padding:10px 15px 10px 15px;
+        @include filter-gradient(#dda8a8, #dda8a8, horizontal); // IE6-9
+        @include background-image(linear-gradient(left,  rgba(221,168,168,1) 0%,rgba(221,168,168,0) 100%));
       }
       
       > p{
-        
+        color:#fff;
+        font-size:12px;
+        margin:0px 15px 10px 15px;
+        line-height:18px;
+        text-align:center;
       }
     }
   } // .profile
@@ -417,13 +427,31 @@ nav{
   } // .profile
   
   .contact {
-    > h2 {
+      background-color:ebdbdb;
       
+    #main_image{
+      width:320px;
+      height:81px;
+      background:url(../images/contact/main.jpg) no-repeat;
+      display:block;
+      background-size: contain;}
+      
+      > h2 {margin:10px;
     }
     
     .contact-detail {
-      > p {
+        background:url(../images/contact/bg.png) no-repeat;
+        display:block;
+        background-size: contain;
         
+      > p{
+        color:#fff;
+        font-size:12px;
+        margin:10px 15px 10px 15px;
+        line-height:18px;
+        text-align:center;
+        width:320px;
+        height:322px;
       }
     }
   } // .contact
