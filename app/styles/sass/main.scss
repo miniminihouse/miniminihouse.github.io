@@ -375,6 +375,7 @@ nav{
   } // .home
   
   .profile {
+      padding:0 0 40px;
       > h2 {margin:10px;
     }
     
@@ -440,6 +441,10 @@ nav{
     }
     
     .contact-detail {
+       width:320px;
+       height:322px;
+       padding:100px 20px 0;
+        
         background:url(../images/contact/bg.png) no-repeat;
         display:block;
         background-size: contain;
@@ -447,11 +452,9 @@ nav{
       > p{
         color:#fff;
         font-size:12px;
-        margin:10px 15px 10px 15px;
+        //margin:40px 15px 10px 15px;
         line-height:18px;
         text-align:center;
-        width:320px;
-        height:322px;
       }
     }
   } // .contact
@@ -490,6 +493,7 @@ nav{
   } // .copyright
   
   .sns-links {
+
     list-style: none;
     
     position: absolute;
@@ -506,15 +510,8 @@ nav{
     
     > li {
       display: inline-block;
-    }
+      overflow: hidden;
     
-    .facebook{
-      @include border-radius(28px/2);
-      background-color: #3c5a98;
-      margin: 5px;
-      
-      @include hide-text;
-      
       @include breakpoint($breakpoint-tablet) {
         width: 36px;
         height: 36px;
@@ -529,14 +526,37 @@ nav{
       }
     }
     
-    .twitter{
+    .facebook{
       @include border-radius(28px/2);
-      background: #55acef;
       margin: 5px;
-      
+      background:url(../images/sns_facebook.png) no-repeat #3c5a98;
+      background-size:30px 30px;
+      background-position:center;
       @include hide-text;
       
-      @include breakpoint($breakpoint-tablet) {
+/*       @include breakpoint($breakpoint-tablet) {
+        width: 36px;
+        height: 36px;
+        margin: 10px;
+        @include border-radius(56px/2);
+      }
+        @include breakpoint($breakpoint-desktop) {
+        width: 56px;
+        height: 56px;
+        margin: 10px;
+        @include border-radius(56px/2);
+      } */
+    }
+    
+    .twitter{
+      @include border-radius(28px/2);
+      margin: 5px;
+      background:url(../images/sns_twitter.png) no-repeat #55acef;
+      background-size:30px 30px;
+      background-position:center;
+      @include hide-text;
+      
+/*       @include breakpoint($breakpoint-tablet) {
         width: 36px;
         height: 36px;
         margin: 10px;
@@ -548,7 +568,7 @@ nav{
         height: 56px;
         margin: 10px;
         @include border-radius(56px/2);
-      }
+      } */
     }
     
     a {
