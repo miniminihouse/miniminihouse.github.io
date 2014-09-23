@@ -314,20 +314,17 @@ nav{
   @include container($container-max-width);
     
   .home {
-/*     @include breakpoint($breakpoint-tablet) {
-      #main_image{
-      width:498px;
-      height:725px;
-      background:url(../images/top/bg_chara1.png) no-repeat;
-      display:block;
-      }
-    } */
+      margin-bottom:160px;
+     @include breakpoint($breakpoint-desktop) {
+      margin-bottom:50px;
+    } 
     #main_image{
       width:320px;
       height:81px;
       background:url(../images/top/sp_bg_chara1.png) no-repeat;
       display:block;
       background-size: contain;
+      padding:0 0 800px;
       
       @include breakpoint($breakpoint-tablet) {
         width:auto;
@@ -338,12 +335,20 @@ nav{
     }
     
     background-color:#dbb9b7;
-    > h2 {margin:10px;
-    }
     
     article {
-      padding: 0 0 22px 0;
-        
+      padding: 90px 0 0;
+      
+      @include breakpoint($breakpoint-tablet) {
+       margin-right: 400px;
+       padding:30px 0 0;
+      }
+      @include breakpoint($breakpoint-desktop) {
+      margin-right: 400px;
+      } 
+      >h2 {
+      margin: 0 10px 0;
+    }
       >h3 {
         margin:7px 0px 7px 0px;
         font-size: 20px;
@@ -411,10 +416,11 @@ nav{
         
       }
       ul{list-style:none;}
-      #works{height:400px; background:#f1779e;}
-        .work{margin:0 auto; width:80%; padding-top:50px;}
-        .work li{width:18%; margin:1%; background:#fff; float:left;}
-      
+      #works{
+        .work
+        li{width:250px; height:210px; margin:20px 20px 0; background:#fff; float:left;
+        }
+        }
       > p {
         
       }
@@ -428,6 +434,7 @@ nav{
   } // .profile
   
   .contact {
+      padding:0 0 50px;
       background-color:ebdbdb;
       
     #main_image{
