@@ -407,6 +407,8 @@ nav{
   } // .profile
   
   .portfolio {
+    padding:0 0 45px;
+    
     > h2 {
       display: none;
     }
@@ -415,12 +417,26 @@ nav{
       > h3 {
         
       }
-      ul{list-style:none;}
+      
+      ul{
+        list-style:none;
+      }
+      
       #works{
-        .work
-        li{width:250px; height:210px; margin:20px 20px 0; background:#fff; float:left;
+        .work {
+          text-align: center;
+          
+          li{
+            display: inline-block;
+            width:250px; 
+            height:210px; 
+            margin:20px 20px 0; 
+            text-align: left;
+            background:#fff; 
+          }
         }
-        }
+      } // #works
+      
       > p {
         
       }
