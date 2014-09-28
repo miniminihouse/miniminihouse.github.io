@@ -116,6 +116,12 @@ html {
   font-size: 62.5%; // これで 1em が 10px と同じになる
 }
 
+html, body {
+  width: 100%;
+  height: 100%;
+  background-color:#dbb9b7;
+}
+
 // =====================================
 // Root container
 // =====================================
@@ -127,7 +133,7 @@ body{
   //font-family: "Osaka－等幅", Osaka-mono, "ＭＳ ゴシック", "MS Gothic", monospace; // 等幅書体
   //font-family: "ヒラギノ丸ゴ ProN W4", "Hiragino Maru Gothic ProN", "メイリオ", Meiryo, fantasy; // OS X限定 丸ゴシック体
 
-  @include font-size(14);
+  @include font-size(14); // << 基準フォントサイズ
 }
 
 /* #content {
@@ -174,8 +180,8 @@ nav{
   width: 100%; */
 
 #main-container {
+  min-height: 100%;
   overflow: hidden;
-  background-color:#dbb9b7;
 }
 
 // =====================================
@@ -236,8 +242,9 @@ nav{
       padding: 0;
       color: #ffffff;
 
-      @include font-size(12);
-      font-family: bold;
+      font-family: Verdana, "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif; // ゴシック体
+      //font-weight: bold;
+      @include font-size(13);
       @include line-height(50);
       text-align: center;
       
@@ -258,18 +265,23 @@ nav{
         }
       }
       
+      &:hover{
+        //border-bottom: 6px solid #b2918f;
+        border-bottom: 6px solid #daa
+      }
+      
       &.selected {
-        border-bottom: 6px solid #ffffff;
-        color: #ffffff;
+        border-bottom: 6px solid #fff;
+        color: #fff;
         
         @include breakpoint($breakpoint-tablet) {
-        border-bottom: 6px solid #b2918f;
-        color: #b2918f;
-      }
+          border-bottom: 6px solid #b2918f;
+          color: #b2918f;
+        }
       }
       
       &.ng-click-active:not([disabled]) {
-        border-bottom: 6px solid #ddaaaa
+        border-bottom: 6px solid #daa
       }
       
       @include breakpoint($breakpoint-tablet) {
@@ -277,7 +289,6 @@ nav{
       }
     } // button
     
-    button:hover{border-bottom: 6px solid #b2918f;} 
     
     .home {
       &:before {
@@ -312,86 +323,107 @@ nav{
 
 #content {
   @include container($container-max-width);
-    
+  
+  // #footer 高さ分の余白
+  padding-bottom: 22px; 
+  @include breakpoint($breakpoint-desktop) {
+    padding-bottom: 44px;
+  }
+  
+  //
+  // HOME
+  //
+  
   .home {
-      margin-bottom:160px;
-     @include breakpoint($breakpoint-desktop) {
-      margin-bottom:50px;
-    } 
-    #main_image{
-      width:320px;
-      height:81px;
-      background:url(../images/top/sp_bg_chara1.png) no-repeat;
-      display:block;
-      background-size: contain;
-      padding:0 0 800px;
-      
-      @include breakpoint($breakpoint-tablet) {
-        width:auto;
-        height:725px;
-        background:url(../images/top/bg_chara1.png) no-repeat;
-        background-position: center right;
-      }
+    padding:140px 0 40px;
+    @include box-sizing(border-box);
+    
+    @include background(
+      image-url('top/sp_bg_chara1.png') right top no-repeat,
+      linear-gradient(to right, #dca9a8, #dcb9b7) top no-repeat,
+      image-url('top/sp_welcome.png') 10px 91px no-repeat
+    );
+    @include background-size(auto 81px, 100% 81px, auto 47px);
+    
+    @include breakpoint($breakpoint-tablet) {
+      min-height:740px;
+      padding: 140px 488px 10px 0;
+      @include background(
+        image-url('top/bg_chara1.png') right center no-repeat,
+        image-url('top/welcome.png') left 40px no-repeat
+      );
+      @include background-size(498px 725px, auto 89px);
     }
     
-    background-color:#dbb9b7;
-    
-    article {
-      padding: 90px 0 0;
-      
-      @include breakpoint($breakpoint-tablet) {
-       margin-right: 400px;
-       padding:30px 0 0;
+    .about {
+      > h2 {
+        margin: 0 10px 0;
       }
-      @include breakpoint($breakpoint-desktop) {
-      margin-right: 400px;
-      } 
-      >h2 {
-      margin: 0 10px 0;
-    }
-      >h3 {
-        margin:7px 0px 7px 0px;
-        font-size: 20px;
+      
+      > h3 {
+        margin: 7px 0;
         display:block;
-        font-family: "Myriad Web Pro";
+        
+        //font-family: "Myriad Web Pro"; // >> ブラウザーフォント使うなら下のどれかじゃないとダメ
+        font-family: Verdana, "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif; // ゴシック体
+        //font-family: "Times New Roman", "游明朝", YuMincho, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "メイリオ", Meiryo, serif;// 明朝体
+        //font-family: "Osaka－等幅", Osaka-mono, "ＭＳ ゴシック", "MS Gothic", monospace; // 等幅書体
+        //font-family: "ヒラギノ丸ゴ ProN W4", "Hiragino Maru Gothic ProN", "メイリオ", Meiryo, fantasy; // OS X限定 丸ゴシック体
+        font-weight: bold;
+        @include font-size(20);
+        
         color: #fff;
-        padding:10px 15px 10px 15px;
+        padding: 10px 15px;
         @include filter-gradient(#dda8a8, #dda8a8, horizontal); // IE6-9
         @include background-image(linear-gradient(left,  rgba(221,168,168,1) 0%,rgba(221,168,168,0) 100%));
       }
-      h4{font-weight:bold;
-      color:#b29290;
-      margin:0px 15px 10px 15px;
+      
+      > h4 {
+        font-weight:bold;
+        color:#b29290;
+        margin: 10px 15px;
       }
-      > p{
+      
+      > p {
         color:#fff;
         font-size:12px;
         margin:0px 15px 10px 15px;
         line-height:18px;
       }
       
-       .more{
+      .more{
         display:block;
         float:right;
         margin:15px;
-        }
-    }
+      }
+      
+    } // .about
     
   } // .home
   
+  //
+  // PROFILE
+  //
+  
   .profile {
-      padding:0 0 40px;
-      > h2 {margin:10px;
+    padding:0 0 40px;
+    
+    > h2 {
+      margin:10px;
     }
     
     article {
-      >h3 {
+      > h3 {
         margin:7px 0px 7px 0px;
-        font-size: 20px;
-        display:block;
-        font-family: "Myriad Web Pro";
-        color: #fff;
         padding:10px 15px 10px 15px;
+        
+        color: #fff;
+        
+        //font-family: "Myriad Web Pro";
+        font-family: Verdana, "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif; // ゴシック体
+        font-weight: bold;
+        @include font-size(20);
+        
         @include filter-gradient(#dda8a8, #dda8a8, horizontal); // IE6-9
         @include background-image(linear-gradient(left,  rgba(221,168,168,1) 0%,rgba(221,168,168,0) 100%));
       }
@@ -406,8 +438,12 @@ nav{
     }
   } // .profile
   
+  //
+  // PORTFOLIO
+  //
+  
   .portfolio {
-    padding:0 0 45px;
+    padding:0 0 40px;
     
     > h2 {
       display: none;
@@ -418,7 +454,7 @@ nav{
         
       }
       
-      ul{
+      ul {
         list-style:none;
       }
       
@@ -426,7 +462,7 @@ nav{
         .work {
           text-align: center;
           
-          li{
+          li {
             display: inline-block;
             width:250px; 
             height:210px; 
@@ -449,9 +485,13 @@ nav{
     } // .project-thumbnail
   } // .profile
   
+  //
+  // CONTACT
+  //
+  
   .contact {
-      padding:0 0 50px;
-      background-color:ebdbdb;
+      padding: 0 0 50px;
+      background-color: #ebdbdb;
       
     #main_image{
       width:320px;
@@ -481,6 +521,7 @@ nav{
       }
     }
   } // .contact
+  
 } // #content
 
 // =====================================
@@ -493,7 +534,10 @@ nav{
   left: 0;
   bottom: 0;
   
-  min-height: 22px;
+  height: 22px;
+  @include breakpoint($breakpoint-desktop) {
+    height: 44px;
+  }
   
   background: #c4a7a3;
   
@@ -516,16 +560,11 @@ nav{
   } // .copyright
   
   .sns-links {
-
     list-style: none;
     
     position: absolute;
-    top: -(28px+15);
-    right: 10px;
-    
-      @include breakpoint($breakpoint-tablet) {
-      top: -((86px+20)/2);
-    }
+    top: -(36px+15px);
+    right: 5px;
     
     @include breakpoint($breakpoint-desktop) {
       top: -((56px+20)/2);
@@ -533,71 +572,41 @@ nav{
     
     > li {
       display: inline-block;
+    }
+    
+    a {
+      display: block;
       overflow: hidden;
-    
-      @include breakpoint($breakpoint-tablet) {
-        width: 36px;
-        height: 36px;
-        margin: 10px;
-        @include border-radius(56px/2);
-      }
-        @include breakpoint($breakpoint-desktop) {
-        width: 56px;
-        height: 56px;
-        margin: 10px;
-        @include border-radius(56px/2);
-      }
-    }
-    
-    .facebook{
-      @include border-radius(28px/2);
-      margin: 5px;
-      background:url(../images/sns_facebook.png) no-repeat #3c5a98;
-      background-size:30px 30px;
-      background-position:center;
       @include hide-text;
       
-/*       @include breakpoint($breakpoint-tablet) {
-        width: 36px;
-        height: 36px;
-        margin: 10px;
-        @include border-radius(56px/2);
-      }
-        @include breakpoint($breakpoint-desktop) {
-        width: 56px;
-        height: 56px;
-        margin: 10px;
-        @include border-radius(56px/2);
-      } */
-    }
-    
-    .twitter{
-      @include border-radius(28px/2);
+      width: 36px;
+      height: 36px;
       margin: 5px;
-      background:url(../images/sns_twitter.png) no-repeat #55acef;
-      background-size:30px 30px;
-      background-position:center;
-      @include hide-text;
-      
-/*       @include breakpoint($breakpoint-tablet) {
-        width: 36px;
-        height: 36px;
-        margin: 10px;
-        @include border-radius(56px/2);
-      }
+      @include border-radius(36px/2);
       
       @include breakpoint($breakpoint-desktop) {
         width: 56px;
         height: 56px;
         margin: 10px;
         @include border-radius(56px/2);
-      } */
-    }
-    
-    a {
-      display: block;
-      width: 28px;
-      height: 28px;
-    }
+      }
+      
+      &.twitter {
+        @include background(image-url('sns_twitter.png') center no-repeat, #55acef);
+        @include background-size(30px);
+        @include breakpoint($breakpoint-desktop) {
+          @include background-size(50px);
+        }
+      }
+      
+      &.facebook {
+        @include background(image-url('sns_facebook.png') center no-repeat, #3c5a98);
+        @include background-size(30px);
+        @include breakpoint($breakpoint-desktop) {
+          @include background-size(50px);
+        }
+      }
+    } // a
   } // .sns-links
+  
 } // #footer
