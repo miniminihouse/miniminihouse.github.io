@@ -532,24 +532,48 @@ nav{
       padding: 0 0 50px;
       background-color: #ebdbdb;
       
-    #main_image{
+/*     #main_image{
       width:320px;
       height:81px;
       background:url(../images/contact/main.jpg) no-repeat;
       display:block;
-      background-size: contain;}
-      
-      > h2 {margin:10px;
-    }
+      background-size: contain;
+      } */
+
+      @include background(
+      image-url('contact/sp_main_chara.jpg') right top no-repeat,
+      linear-gradient(to right, #ddabab, #ddabab) top no-repeat,
+      image-url('contact/h2_contact.png') 10px 91px no-repeat
+    );
+    @include background-size(auto 81px, 100% 81px, auto 47px);
+    float:top;
     
+    @include breakpoint($breakpoint-tablet) {
+      min-height:817px;
+/*       padding: 140px 488px 10px 0; */
+      @include background(
+        image-url('contact/pc_bg_chara.png') left no-repeat,
+        image-url('contact/contact.png') left 40px no-repeat
+      );
+      @include background-size(817px 880px, auto 89px);
+    }
+
     .contact-detail {
-       width:320px;
-       height:322px;
-       padding:100px 20px 0;
-        
-        background:url(../images/contact/bg.png) no-repeat;
-        display:block;
-        background-size: contain;
+       padding:170px 20px 0 20px;
+       margin-bottom:150px;
+/*        background:url(../images/contact/bg.png) no-repeat; */
+       display:block;
+       background-size: contain;
+
+      @include breakpoint($breakpoint-tablet) {
+       background:url(../images/contact/pc_bg.png) right no-repeat;
+       display:block;
+       float:right;
+       width:550px;
+       height:555px;
+       margin-top:110px;
+       padding:200px 0px 0px 100px;
+      }
         
       > p{
         color:#fff;
@@ -557,6 +581,8 @@ nav{
         //margin:40px 15px 10px 15px;
         line-height:18px;
         text-align:center;
+        display:block;
+        float:left;
       }
     }
   } // .contact
