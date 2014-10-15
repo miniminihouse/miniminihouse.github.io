@@ -555,24 +555,32 @@ nav{
         image-url('contact/pc_bg_chara.png') left no-repeat,
         image-url('contact/contact.png') left 40px no-repeat
       );
+      
+        padding-top: 150px;
+
       @include background-size(817px 880px, auto 89px);
     }
 
     .contact-detail {
-       padding:170px 20px 0 20px;
+       padding:250px 20px 0 20px;
        margin-bottom:150px;
-/*        background:url(../images/contact/bg.png) no-repeat; */
-       display:block;
+       background:url(../images/contact/bg.png) center 150px no-repeat;
        background-size: contain;
 
       @include breakpoint($breakpoint-tablet) {
-       background:url(../images/contact/pc_bg.png) right no-repeat;
-       display:block;
-       float:right;
-       width:550px;
-       height:555px;
-       margin-top:110px;
-       padding:200px 0px 0px 100px;
+       background-position: center 0px;
+       width:500px;
+       height:855px;
+       padding:170px 0px 0px 0;
+       margin-left:500px;
+      }
+      
+      @include breakpoint($breakpoint-desktop) {
+       background-position: center 0px;
+       width:500px;
+       height:855px;
+       padding:170px 0px 0px 0;
+       margin-left:500px;
       }
         
       > p{
@@ -582,7 +590,6 @@ nav{
         line-height:18px;
         text-align:center;
         display:block;
-        float:left;
       }
     }
   } // .contact
