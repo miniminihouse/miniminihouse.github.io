@@ -322,7 +322,7 @@ nav{
 // =====================================
 
 #content {
-  @include container($container-max-width);
+  //@include container($container-max-width);
   
   // #footer 高さ分の余白
   padding-bottom: 22px; 
@@ -374,6 +374,7 @@ nav{
   //
   
   .home {
+    @include container($container-max-width);
     padding:140px 0 40px;
     @include box-sizing(border-box);
     
@@ -445,6 +446,7 @@ nav{
   //
   
   .profile {
+    @include container($container-max-width);
     padding:0 0 40px;
     
     > h2 {
@@ -482,6 +484,7 @@ nav{
   //
   
   .portfolio {
+    @include container($container-max-width);
     padding:0 0 40px;
     
     > h2 {
@@ -552,13 +555,21 @@ nav{
       min-height:817px;
 /*       padding: 140px 488px 10px 0; */
       @include background(
-        image-url('contact/pc_bg_chara.png') left no-repeat,
-        image-url('contact/contact.png') left 40px no-repeat
+        image-url('contact/pc_bg_chara.png') left no-repeat
+/*         image-url('contact/contact.png') left 40px no-repeat */
       );
       
-        padding-top: 150px;
+        
+      @include background-size(817px 880px);
+    }
+    .contact-container{
+      @include container($container-max-width);
+      padding-top: 150px;
 
-      @include background-size(817px 880px, auto 89px);
+      @include background(
+      image-url('contact/contact.png') left 40px no-repeat
+      );
+     @include background-size(auto 87px);
     }
 
     .contact-detail {
@@ -568,14 +579,6 @@ nav{
        background-size: contain;
 
       @include breakpoint($breakpoint-tablet) {
-       background-position: center 0px;
-       width:500px;
-       height:855px;
-       padding:170px 0px 0px 0;
-       margin-left:500px;
-      }
-      
-      @include breakpoint($breakpoint-desktop) {
        background-position: center 0px;
        width:500px;
        height:855px;
