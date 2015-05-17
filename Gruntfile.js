@@ -97,10 +97,11 @@ module.exports = function(grunt) {
           livereload: 35731
         },
         files: [
-          'app/images/**/*.{png,jpg,gif}',
-          'app/styles/**/*.css',
-          'app/scripts/**/*.js',
-          'app/**/*.html'
+          'app/images/{,*/}*.{png,jpg,gif}',
+          'app/styles/{,*/}*.css',
+          'app/scripts/{,*/}*.js',
+          'app/views/{,*/}*.html',
+          'app/index.html'
         ]
       }
     },
@@ -195,7 +196,7 @@ module.exports = function(grunt) {
     
     shell: {
       sassWatch: {
-        command: 'sass --compass --sourcemap -l -t expanded --watch app/styles/sass:app/styles',
+        command: 'sass --compass -l -t expanded --watch app/styles/sass:app/styles',
         //command: 'compass watch', // compass watch is too late
         options: {
           async: true,
@@ -204,7 +205,7 @@ module.exports = function(grunt) {
         }
       },
       sassUpdate: {
-        command: 'sass --compass --sourcemap -l -t expanded --update app/styles/sass:app/styles',
+        command: 'sass --compass -l -t expanded --update app/styles/sass:app/styles',
         options: {
           async: true,
           stdout: true,
@@ -214,8 +215,8 @@ module.exports = function(grunt) {
     }, // shell
   });
 
-  // Server task.
-  grunt.registerTask('server', 'Launch local web server and enable live-reloading.', function(target) {
+  // Serve task.
+  grunt.registerTask('serve', 'Launch local web server and enable live-reloading.', function(target) {
     var tasks = [];
     
     if (target === 'dist') {
