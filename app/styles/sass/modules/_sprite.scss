@@ -1,0 +1,162 @@
+// Sprite
+//
+// Compass sprite helper mixins. (support for high definition displays)
+//
+// Styleguide 9.1.
+
+
+// get-sprite
+//
+// ```scss
+// get-sprite($path, [$sprite-layout])
+// ```
+//
+// Get generated sprite map instance.
+//
+// **Usage:**
+//
+// ```scss
+// $icon-sprite: get-sprite("icon");
+// ```
+//
+// **Parameters:**
+//
+// * `$path`          - Source images path pattern.
+// * `$sprite-layout` - Output sprite image layout. (default: smart)
+//
+//
+// **Return:**
+//
+// Compass sprite map instance.
+//
+// Compatible in iOS Safari 4.0+, Android Browser 2.2+.
+//
+// Styleguide 9.1.1.
+@function get-sprite($path, $sprite-layout: smart) {
+  @return sprite-map($path + "/" + "*.png", $layout: $sprite-layout);
+}
+
+
+// sprite
+//
+// ```scss
+// sprite($sprite-map, $part-name, [$pixel-ratio])
+// ```
+//
+// Set sprite as background image。
+//
+// **Usage:**
+//
+// ```scss
+// $icon-sprite: sprite-map("icon/*.png", $layout: smart);
+// 
+// .home-icon {
+//   @include sprite($icon-sprite, 'home', 2);
+// }
+// ```
+// 
+// **Parameters:**
+//
+// * `$sprite-map`  - Compass sprite map instance.
+// * `$part-name`   - Sprite parts name.
+// * `$pixel-ratio` - Pixel ratio. (default: 1)
+//
+// Compatible in iOS Safari 4.0+, Android Browser 2.2+.
+//
+// Styleguide 9.1.2.
+@mixin sprite($sprite-map, $part-name, $pixel-ratio: 1) {
+  background: sprite-url($sprite-map);
+  @include background-size(
+    image-width(sprite-path($sprite-map)) / $pixel-ratio 
+    image-height(sprite-path($sprite-map)) / $pixel-ratio
+  );
+
+  background-position: 
+    nth(sprite-position($sprite-map, $part-name), 1) / $pixel-ratio
+    nth(sprite-position($sprite-map, $part-name), 2) / $pixel-ratio;
+    
+  width: image-width(sprite-file($sprite-map, $part-name)) / $pixel-ratio;
+  height: image-height(sprite-file($sprite-map, $part-name)) / $pixel-ratio;
+}
+
+
+// sprite-base
+//
+// ```scss
+// sprite-base($sprite-map, [$pixel-ratio])
+// ```
+//
+// Set sprite as background image. (for sprite base)
+//
+// **Usage:**
+//
+// ```scss
+// .icon {
+//   @include sprite-base($icon-sprite, 2);
+//   
+//   &.home {
+//     @include sprite-part($icon-sprite, 'home', 2);
+//   }
+//   &.my-page {
+//     @include sprite-part($icon-sprite, 'my-page', 2);
+//   }
+// }
+// ```
+//
+// **Parameters:**
+//
+// * `$sprite-map`  - Compass sprite map instance.
+// * `$pixel-ratio` - Pixel ratio. (default: 1)
+//
+// Compatible in iOS Safari 4.0+, Android Browser 2.2+.
+//
+// Styleguide 9.1.3.
+@mixin sprite-base($sprite-map, $pixel-ratio: 1) {
+  background: sprite-url($sprite-map);
+  @include background-size(
+    image-width(sprite-path($sprite-map)) / $pixel-ratio 
+    image-height(sprite-path($sprite-map)) / $pixel-ratio
+  );
+}
+
+
+// sprite-part
+//
+// ```scss
+// sprite-part($sprite-map, $part-name, [$pixel-ratio])
+// ```
+//
+// Set sprite as background image. (for sprite part)
+//
+// **Usage:**
+//
+// ```scss
+// .icon {
+//   @include sprite-base($icon-sprite, 2);
+//   
+//   &.home {
+//     @include sprite-part($icon-sprite, 'home', 2);
+//   }
+//   &.my-page {
+//     @include sprite-part($icon-sprite, 'my-page', 2);
+//   }
+// }
+// ```
+//
+// **Parameters:**
+//
+// * `$sprite-map`  - Compass sprite map instance.
+// * `$part-name`   - Sprite parts name.
+// * `$pixel-ratio` - Pixel ratio. (default: 1)
+//
+// Compatible in iOS Safari 4.0+, Android Browser 2.2+.
+//
+// Styleguide 9.1.4.
+@mixin sprite-part($sprite-map, $part-name, $pixel-ratio: 1) {
+  background-position: 
+    nth(sprite-position($sprite-map, $part-name), 1) / $pixel-ratio
+    nth(sprite-position($sprite-map, $part-name), 2) / $pixel-ratio;
+    
+  width: image-width(sprite-file($sprite-map, $part-name)) / $pixel-ratio;
+  height: image-height(sprite-file($sprite-map, $part-name)) / $pixel-ratio;
+}

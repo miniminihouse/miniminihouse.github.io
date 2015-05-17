@@ -1,0 +1,42 @@
+// Image
+//
+// Image styling helper mixins. (support for high definition displays)
+//
+// Styleguide 9.3.
+
+
+// image-background
+//
+// ```scss
+// image-background($image-url, [$pixel-ratio])
+// ```
+//
+// Set background image with automated size setting.
+//
+// **Usage:**
+//
+// ```scss
+// .my-container {
+//   @include image-background('my/container-background.png', 2);
+// }
+// ```
+// 
+// **Parameters:**
+//
+// * `$image-url`   - Image url. (using image-url function)
+// * `$pixel-ratio` - Pixel ratio. (default: 1)
+//
+// Compatible in iOS Safari 4.0+, Android Browser 2.2+.
+//
+// Styleguide 9.3.1.
+@mixin image-background($image-url, $pixel-ratio: 1) {
+  width: image-width($image-url) / $pixel-ratio;
+  height: image-height($image-url) / $pixel-ratio;
+  
+  @include background(image-url($image-url) no-repeat);
+  
+  @include background-size(
+    image-width($image-url) / $pixel-ratio 
+    image-height($image-url) / $pixel-ratio
+  );
+}

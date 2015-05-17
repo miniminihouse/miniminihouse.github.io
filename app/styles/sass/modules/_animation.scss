@@ -1,0 +1,168 @@
+// Animation
+//
+// Common animations.
+//
+// Useful CSS animation resources.
+//
+// * [Animation.css](http://daneden.github.io/animate.css/)
+//
+// Styleguide 9.2.
+
+
+// blink-animation
+// 
+// ```scss
+// blink-animation([$key-frame-name], [$max-alpha:1], [$min-alpha])
+// ```
+//
+// Blinking animation.
+//
+// **Usage:**
+//
+// ```scss
+// @include blink-animation('warning-animation', .8, .2);
+// 
+// .warning {
+//   @include animation(warning-animation .5s);
+// }
+// ```
+//
+// **Parameters:**
+//
+// * `$key-frame-name`  - Keyframes name. (default: 'blink-animation')
+// * `$max-alpha`       - Blinking maximum alpha. (default: 1.0)
+// * `$min-alpha`       - Blinking minimum alpha. (default: 0.0)
+//
+// Compatible in iOS Safari 4.0+, Android Browser 2.2+.
+//
+// Styleguide 9.2.1.
+@mixin blink-animation($key-frame-name:'blink-animation', $max-alpha:1, $min-alpha:0) {
+  @include keyframes($key-frame-name) {
+    0%, 100% {
+      opacity: $max-alpha;
+    }
+    50% {
+      opacity: $min-alpha;
+    }
+  }
+}
+
+
+// glow-animation
+// 
+// ```scss
+// glow-animation([$key-frame-name], [$color], [$blur], [$distance])
+// ```
+//
+// Glow animation.
+//
+// **Usage:**
+//
+// ```scss
+// @include glow-animation('warning-animation', #f00, 4px, 10px);
+// 
+// .warning {
+//   @include animation(warning-animation .5s);
+// }
+// ```
+//
+// **Parameters:**
+//
+// * `$key-frame-name`  - Keyframes name. (default: 'glow-animation')
+// * `$color`           - Light color.
+// * `$blur`            - Blur strength. (default: 10px)
+// * `$distance`        - Light distance. (default: 6px)
+//
+// Compatible in iOS Safari 4.0+, Android Browser 2.2+.
+//
+// Styleguide 9.2.2.
+@mixin glow-animation($key-frame-name:'glow-animation', $color:#fff, $blur:10px, $distance:6px) {
+  @include keyframes($key-frame-name) {
+    0% { 
+      @include box-shadow($color  0 0 0px 0px);
+    }
+    50% { 
+      @include box-shadow($color  0 0 $blur $distance);
+    }
+    100% { 
+      @include box-shadow($color  0 0 0px 0px);
+    }
+  }
+}
+
+
+// slide-animation-horizontal
+//
+// ```scss
+// slide-animation([$key-frame-name], [$start-x], [$end-x])
+// ```
+//
+// Slide animation. (horizontal)
+//
+// **Usage:**
+//
+// ```scss
+// @include slide-animation('slide-from-right', 320px, 0);
+// 
+// .ticker {
+//   @include animation(slide-from-right .5s);
+// }
+// ```
+//
+// **Parameters:**
+//
+// * `$key-frame-name` - Keyframes name. (default: 'slide-animation-horizontal')
+// * `$startX`         - Slide start X dimension. (default: 0)
+// * `$endX`           - Slide end X dimension. (default: 320px)
+//
+// Compatible in iOS Safari 4.0+, Android Browser 2.2+.
+//
+// Styleguide 9.2.3.
+@mixin slide-animation($key-frame-name:'slide-animation-horizontal', $start-x: 0, $end-x: 320px) {
+  @include keyframes($key-frame-name) {
+    0% {
+      @include transform(translateX($start-x));
+    }
+    100% {
+      @include transform(translateX($end-x));
+    }
+  }
+}
+
+// slide-animation-vertical
+//
+// ```scss
+// slide-animation([$key-frame-name], [$start-x], [$end-x])
+// ```
+//
+// Slide animation. (vertical)
+//
+// **Usage:**
+//
+// ```scss
+// @include slide-animation(’slide-from-down', 640px, 0);
+//
+// .ticker {
+//   @include animation(slide-from-down .5s);
+// }
+// ```
+//
+// **Parameters:**
+//
+// * `$key-frame-name` - Keyframes name. (default: 'slide-animation-vertical')
+// * `$startY`         - Slide start Y dimension. (default: 0)
+// * `$endY`           - Slide end Y dimension. (default: 640px)
+//
+// Compatible in iOS Safari 4.0+, Android Browser 2.2+.
+//
+// Styleguide 9.2.4.
+@mixin slide-animation($key-frame-name:'slide-animation-vertical', $start-y: 0, $end-y: 640px) {
+  @include keyframes($key-frame-name) {
+    0% {
+      @include transform(translateY($start-y));
+    }
+    100% {
+      @include transform(translateY($end-y));
+    }
+  }
+}
