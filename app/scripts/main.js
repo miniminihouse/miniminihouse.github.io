@@ -31,6 +31,17 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 //--------------------------------------
 
 app.controller('MainCtrl', ['$scope', function($scope) {
+  $scope.portfolioModalShown;
+  $scope.portfolioModalImage;
+
+  $scope.showPortfolioModal = function(url) {
+    $scope.portfolioModalImage = url;
+    $scope.portfolioModalShown = true;
+  };
+
+  $scope.hidePortfolioModal = function() {
+    $scope.portfolioModalShown = false;
+  };
 
 }]);
 

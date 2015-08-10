@@ -106,6 +106,12 @@
         </div>
       </footer>
       <!-- /footer -->
+
+      <div class="portfolio-modal ng-hide" 
+           ng-show="portfolioModalShown"
+           ng-click="hidePortfolioModal()">
+        <img ng-src="{{portfolioModalImage}}">
+      </div>
     </div>
     <!-- /container-->
 

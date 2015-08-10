@@ -460,6 +460,9 @@ $icon-sprite: get-sprite("icons");
             margin:20px 20px 0;
             text-align: left;
             background:#fff;
+            img {
+              vertical-align: middle;
+            }
           }
         }
       }
@@ -559,6 +562,34 @@ $icon-sprite: get-sprite("icons");
         display:block;
       }
     }
+  }
+}
+
+.portfolio-modal {
+  @include stretch;
+  position: fixed;
+  background-color: rgba(0,0,0,0.5);
+
+/*   &.ng-hide-add, &.ng-hide-remove {
+    transition: 0s linear all;
+  }
+
+  &.ng-hide-add-active,
+  &.ng-hide-remove-active {
+    transition: 1s linear all;
+  } */
+
+  @include transition(opacity linear .3s);
+
+  &.ng-hide {
+    opacity: 0;
+  }
+
+
+  img {
+    @include stretch;
+    margin: auto;
+    max-width: 100%;
   }
 }
 
