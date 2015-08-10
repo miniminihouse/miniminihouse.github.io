@@ -50,7 +50,7 @@ module.exports = function(grunt) {
               middlewares.push(connect.static(base));
             });
 
-            middlewares.push( 
+            middlewares.push(
               require('connect-livereload')({
                 hostname: '0.0.0.0',
                 port: LIVERELOAD_PORT
@@ -131,7 +131,7 @@ module.exports = function(grunt) {
         }]
       }
     },
-    
+
     useminPrepare: {
       html: 'app/index.html',
       options: {
@@ -193,7 +193,7 @@ module.exports = function(grunt) {
         }]
       }
     },
-    
+
     shell: {
       sassWatch: {
         command: 'sass --compass -l -t expanded --watch app/styles/sass:app/styles',
@@ -213,12 +213,34 @@ module.exports = function(grunt) {
         }
       }
     }, // shell
+
+    ngtemplates: {
+      options: {
+        htmlmin:  {
+          collapseBooleanAttributes: true,
+          removeAttributeQuotes: false,
+          removeRedundantAttributes: true,
+          useShortDoctype: true,
+          removeEmptyAttributes: false,
+          removeOptionalTags: true,
+          removeComments: true,
+          removeCommentsFromCDATA: true,
+          collapseWhitespace: true
+        },
+        module: 'miniminihouse'
+      },
+      files: {
+        cwd: 'app',
+        src: 'views/**/*.html',
+        dest: '.tmp/scripts/templates.js'
+      }
+    }
   });
 
   // Serve task.
   grunt.registerTask('serve', 'Launch local web server and enable live-reloading.', function(target) {
     var tasks = [];
-    
+
     if (target === 'dist') {
       tasks = [
         'configureRewriteRules',
@@ -227,12 +249,12 @@ module.exports = function(grunt) {
     } else {
       tasks = [
         'configureRewriteRules',
-        'connect:livereload', 
+        'connect:livereload',
         'shell:sassWatch',
         'watch'
       ];
     }
-    
+
     grunt.task.run(tasks);
   });
 
@@ -242,6 +264,7 @@ module.exports = function(grunt) {
       'clean:dist',
       'copy:build',
       'useminPrepare',
+      'ngtemplates',
       'concat',
       'cssmin',
       'filerev:images',
@@ -260,5 +283,5 @@ module.exports = function(grunt) {
   grunt.registerTask('default', [
     'build'
   ]);
-  
+
 };

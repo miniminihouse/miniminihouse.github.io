@@ -391,11 +391,16 @@ $icon-sprite: get-sprite("icons");
 
   .profile {
     @include container($container-max-width);
-    padding:0 0 40px;
+    padding: 90px 0 40px;
 
-    > h2 {
-      margin:10px;
-    }
+    @include background(
+      image-url('labels/profile.png') 10px 10px no-repeat
+    );
+    @include background-size(auto 47px);
+
+    //> h2 {
+    //  margin:10px;
+    //}
 
     article {
       > h3 {

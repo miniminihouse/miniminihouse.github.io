@@ -6,9 +6,9 @@
     <title>mini's design house</title>
     <meta name="description" content="mini's personal website.">
     <meta name="keywords" content="design,ui,web,illust,girl,dot">
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-    
+
     <!-- Shortcut icon images. -->
     <!--
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/touch/apple-touch-icon-144x144-precomposed.png">
@@ -17,39 +17,39 @@
     <link rel="apple-touch-icon-precomposed" href="images/touch/apple-touch-icon-57x57-precomposed.png">
     <link rel="shortcut icon" href="images/touch/apple-touch-icon.png">
     -->
-    
+
     <!-- For iOS web apps. Delete if not needed. https://github.com/h5bp/mobile-boilerplate/issues/94 -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="mini's design house">
-    
+
     <!-- This script prevents links from opening in Mobile Safari. https://gist.github.com/1042026 -->
     <!--
     <script>(function(a,b,c){if(c in b&&b[c]){var d,e=a.location,f=/^(a|html)$/i;a.addEventListener("click",function(a){d=a.target;while(!f.test(d.nodeName))d=d.parentNode;"href"in d&&(d.href.indexOf("http")||~d.href.indexOf(e.host))&&(a.preventDefault(),e.href=d.href)},!1)}})(document,window.navigator,"standalone")</script>
     -->
-    
+
     <!-- build:css styles/main.min.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
-    
+
     <!-- build:js scripts/vendor/modernizr.js -->
     <script src="bower_components/modernizr/modernizr.js"></script>
     <!-- endbuild -->
   </head>
-  
-  <body>
+
+  <body ng-app="miniminihouse">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    
+
     <!--[if lt IE 9]>
       <script src="bower_components/es5-shim/es5-shim.js"></script>
       <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
-    
+
     <!-- Add your site or application content here -->
-    
+
     <!-- container-->
     <div id="main-container" ng-controller="MainCtrl">
       <!-- header -->
@@ -62,17 +62,17 @@
                     ng-class="{selected: currentPath == '/'}"
                     ng-disabled="currentPath == '/'"
                     ng-click="navigate('/');">HOME</button><!--
-                    
+
          --><button class="profile"
                     ng-class="{selected: currentPath == '/profile'}"
                     ng-disabled="currentPath == '/profile'"
                     ng-click="navigate('/profile');">PROFILE</button><!--
-                    
+
          --><button class="portfolio"
                     ng-class="{selected: currentPath == '/portfolio'}"
                     ng-disabled="currentPath == '/portfolio'"
                     ng-click="navigate('/portfolio');">PORTFOLIO</button><!--
-                    
+
          --><button class="contact"
                     ng-class="{selected: currentPath == '/contact'}"
                     ng-disabled="currentPath == '/contact'"
@@ -81,10 +81,10 @@
         </div>
       </header>
       <!-- /header -->
-      
+
       <!-- content -->
       <div id="content" ng-view></div>
-      
+
       <!-- footer -->
       <footer id="footer">
         <div class="container">
@@ -108,13 +108,14 @@
       <!-- /footer -->
     </div>
     <!-- /container-->
-    
-    <!-- build:js scripts/main.min.js -->
+
+    <!-- build:js({.,.tmp,app}) scripts/main.min.js -->
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="scripts/main.js"></script>
+    <script src="scripts/templates.js"></script>
     <!-- endbuild -->
   </body>
 </html>

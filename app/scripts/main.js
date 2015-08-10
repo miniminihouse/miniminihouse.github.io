@@ -1,79 +1,73 @@
-(function() {
+//------------------------------------------------------------------------------
+//
+//  Initialize
+//
+//------------------------------------------------------------------------------
 
-  //------------------------------------------------------------------------------
-  //
-  //  Initialize
-  //
-  //------------------------------------------------------------------------------
+var app = angular.module('miniminihouse', [
+  'ngRoute',
+  'ngTouch',
+  'ngAnimate',
+]);
 
-  var app = angular.module('miniminihouse', [
-    'ngRoute',
-    'ngTouch',
-    'ngAnimate',
-  ]);
+//--------------------------------------
+//  Routes
+//--------------------------------------
 
-  //--------------------------------------
-  //  Routes
-  //--------------------------------------
+app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 
-  app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+  $routeProvider.when('/', { templateUrl: 'views/home.html' });
+  $routeProvider.when('/profile', { templateUrl: 'views/profile.html' });
+  $routeProvider.when('/portfolio', { templateUrl: 'views/portfolio.html' });
+  $routeProvider.when('/contact', { templateUrl: 'views/contact.html' });
+  $routeProvider.otherwise('/');
 
-    $routeProvider.when('/', { templateUrl: 'views/home.html' });
-    $routeProvider.when('/profile', { templateUrl: 'views/profile.html' });
-    $routeProvider.when('/portfolio', { templateUrl: 'views/portfolio.html' });
-    $routeProvider.when('/contact', { templateUrl: 'views/contact.html' });
-    $routeProvider.otherwise('/');
+  $locationProvider.html5Mode(true);
 
-    $locationProvider.html5Mode(true);
+}]);
 
-  }]);
+//--------------------------------------
+//  Controllers
+//--------------------------------------
 
-  //--------------------------------------
-  //  Controllers
-  //--------------------------------------
+app.controller('MainCtrl', ['$scope', function($scope) {
 
-  app.controller('MainCtrl', ['$scope', function($scope) {
+}]);
 
-  }]);
+//----------------------------------
+//  RootScope
+//----------------------------------
 
-  //----------------------------------
-  //  RootScope
-  //----------------------------------
+app.run(['$rootScope', '$location', function($rootScope, $location) {
 
-  app.run(['$rootScope', '$location', function($rootScope, $location) {
+  $rootScope.$on('$routeChangeSuccess', function($event, current, previous) {
+    $rootScope.currentPath = $location.$$path;
+  });
 
-    $rootScope.$on('$routeChangeSuccess', function($event, current, previous) {
-      $rootScope.currentPath = $location.$$path;
-    });
-
-    $rootScope.navigate = function(path, search) {
-      if(path) {
-        $location.path(path);
-      }
-
-      if(search) {
-        $location.search(search);
-      }
-    };
-
-  }]);
-
-  angular.bootstrap(document, ['miniminihouse']);
-
-  //------------------------------------------------------------------------------
-  //
-  //  Workarounds
-  //
-  //------------------------------------------------------------------------------
-
-  //--------------------------------------
-  //  iOS Safari bug
-  //--------------------------------------
-
-  window.addEventListener('orientationchange', function() {
-    if(90 === window.orientation || -90 === window.orientation) {
-      document.body.scrollTop = 0;
+  $rootScope.navigate = function(path, search) {
+    if(path) {
+      $location.path(path);
     }
-  }, false);
 
-})();
+    if(search) {
+      $location.search(search);
+    }
+  };
+
+}]);
+
+//------------------------------------------------------------------------------
+//
+//  Workarounds
+//
+//------------------------------------------------------------------------------
+
+//--------------------------------------
+//  iOS Safari bug
+//--------------------------------------
+
+window.addEventListener('orientationchange', function() {
+  if(90 === window.orientation || -90 === window.orientation) {
+    document.body.scrollTop = 0;
+  }
+}, false);
