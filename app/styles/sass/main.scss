@@ -10,15 +10,8 @@
 body {
   -webkit-tap-highlight-color: rgba(0,0,0,0);
   -webkit-touch-callout: none;
-  
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  
+  //@include user-select(none);
   -webkit-text-size-adjust: none;
-  
   cursor: default;
 }
 
@@ -63,7 +56,7 @@ $container-max-width: 960px;
 // =====================================
 
 $breakpoint-desktop: 900px; // スクリーン幅が 900px 以上だったらデスクトップ
-$breakpoint-tablet: 750px; // スクリーン幅が 600px 以上だったらタブレット
+//$breakpoint-tablet: 750px; // スクリーン幅が 750px 以上だったらタブレット
 // それ以外はモバイル（モバイルファスト！）
 
 // =====================================
@@ -138,20 +131,19 @@ $icon-sprite: get-sprite("icons");
 // icon-twitter - 鳥
 // icon-facebook - f
 // ...
-
-.icon {
-  display: inline-block;
-  margin: -1px auto 1px;
-  vertical-align: middle;
-  @include sprite-base($icon-sprite, 1);
-
-  @each $i in sprite-names($icon-sprite){
-    &.icon-#{$i}{
-      @include sprite-part($icon-sprite, #{$i}, 1);
-    }
-  }
-}
-
+//
+// .icon {
+//   display: inline-block;
+//   margin: -1px auto 1px;
+//   vertical-align: middle;
+//   @include sprite-base($icon-sprite, 1);
+//
+//   @each $i in sprite-names($icon-sprite){
+//     &.icon-#{$i}{
+//       @include sprite-part($icon-sprite, #{$i}, 1);
+//     }
+//   }
+// }
 
 // =====================================
 // Header
@@ -160,43 +152,43 @@ $icon-sprite: get-sprite("icons");
 #header {
   min-height: 50px;
   background: #DBB9B7;
-  
-  @include breakpoint($breakpoint-tablet) {
+
+  @include breakpoint($breakpoint-desktop) {
     border-bottom: 1px solid #D2B0AE;
     min-height: 90px;
   }
-  
+
   .logo {
     padding: 10px;
     @include line-height(30);
-    
-    @include breakpoint($breakpoint-tablet) {
+
+    @include breakpoint($breakpoint-desktop) {
       @include span(2 of 5);
       margin: 20px auto 0;
     }
-    
+
     a {
       display: block;
       @include image-background('logo.png', 1);
       @include hide-text;
     }
-  } // .logo
-  
+  }
+
   .nav-buttons {
     background: #b29290;
-    
-    @include breakpoint($breakpoint-tablet) {
+
+    @include breakpoint($breakpoint-desktop) {
       @include span(3 of 5 last);
       margin: 30px auto 0;
       text-align: right;
       background: none;
     }
-    
+
     button {
       position: relative;
       display: inline-block;
       width: 25%;
-      
+
       margin: 0;
       padding: 0;
       color: #ffffff;
@@ -206,24 +198,24 @@ $icon-sprite: get-sprite("icons");
       @include font-size(13);
       @include line-height(50);
       text-align: center;
-      
+
       background: none;
       border: none;
-      
+
       @include box-sizing(border-box);
-      
+
       &:before {
         display: none;
       }
-      
-      @include breakpoint($breakpoint-tablet) {
+
+      @include breakpoint($breakpoint-desktop) {
         width: auto;
         //min-width: 100px;
         margin: auto 10px;
         padding-right: 5px;
         @include font-size(14);
         @include line-height(30);
-        
+
         &:before {
           content: "";
           display: inline-block;
@@ -247,31 +239,28 @@ $icon-sprite: get-sprite("icons");
           @include sprite($icon-sprite, 'contact', 1);
         }
       }
-      
+
       &:hover{
         //border-bottom: 6px solid #b2918f;
         border-bottom: 6px solid #daa
       }
-      
+
       &.selected {
         border-bottom: 6px solid #fff;
         color: #fff;
-        
-        @include breakpoint($breakpoint-tablet) {
+
+        @include breakpoint($breakpoint-desktop) {
           border-bottom: 6px solid #b2918f;
           color: #b2918f;
         }
       }
-      
+
       &.ng-click-active:not([disabled]) {
         border-bottom: 6px solid #daa
       }
-    } // button
-    
-    
-
-  } // .nav-buttons
-} // #header
+    }
+  }
+}
 
 // =====================================
 // Content (SPA contents area)
@@ -279,23 +268,23 @@ $icon-sprite: get-sprite("icons");
 
 #content {
   //@include container($container-max-width);
-  
+
   // #footer 高さ分の余白
-  padding-bottom: 22px; 
+  padding-bottom: 22px;
   @include breakpoint($breakpoint-desktop) {
     padding-bottom: 44px;
   }
-  
+
   // 切り替えアニメーション ~
   opacity: 1;
   @include transform(translate(0, 0));
-    
+
   &.ng-enter, &.ng-leave {
     @include stretch-x;
     margin: auto;
     @include transition(all .5s);
   }
-  
+
   &.ng-enter {
     opacity: 0;
     @include transform(translateY(100px));
@@ -308,7 +297,7 @@ $icon-sprite: get-sprite("icons");
     opacity: 0;
     @include transform(translateY(100px));
   }
-  
+
   @include breakpoint($breakpoint-desktop) {
     &.ng-enter {
       opacity: 0;
@@ -324,24 +313,24 @@ $icon-sprite: get-sprite("icons");
     }
   }
   // ~ 切り替えアニメーション
-  
+
   //
   // HOME
   //
-  
+
   .home {
     @include container($container-max-width);
     padding:140px 0 40px;
     @include box-sizing(border-box);
-    
+
     @include background(
       image-url('characters/home-mini.png') right top no-repeat,
       linear-gradient(to right, #dca9a8, #dcb9b7) top no-repeat,
       image-url('labels/welcome.png') 10px 91px no-repeat
     );
     @include background-size(auto 81px, 100% 81px, auto 47px);
-    
-    @include breakpoint($breakpoint-tablet) {
+
+    @include breakpoint($breakpoint-desktop) {
       min-height:740px;
       padding: 140px 488px 10px 0;
       @include background(
@@ -350,16 +339,16 @@ $icon-sprite: get-sprite("icons");
       );
       @include background-size(498px 725px, auto 89px);
     }
-    
+
     .about {
       > h2 {
         margin: 0 10px 0;
       }
-      
+
       > h3 {
         margin: 7px 0;
         display:block;
-        
+
         //font-family: "Myriad Web Pro"; // >> ブラウザーフォント使うなら下のどれかじゃないとダメ
         font-family: Verdana, "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif; // ゴシック体
         //font-family: "Times New Roman", "游明朝", YuMincho, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "メイリオ", Meiryo, serif;// 明朝体
@@ -367,64 +356,63 @@ $icon-sprite: get-sprite("icons");
         //font-family: "ヒラギノ丸ゴ ProN W4", "Hiragino Maru Gothic ProN", "メイリオ", Meiryo, fantasy; // OS X限定 丸ゴシック体
         font-weight: bold;
         @include font-size(20);
-        
+
         color: #fff;
         padding: 10px 15px;
         @include filter-gradient(#dda8a8, #dda8a8, horizontal); // IE6-9
         @include background-image(linear-gradient(left,  rgba(221,168,168,1) 0%,rgba(221,168,168,0) 100%));
       }
-      
+
       > h4 {
         font-weight:bold;
         color:#b29290;
         margin: 10px 15px;
       }
-      
+
       > p {
         color:#fff;
         font-size:12px;
         margin:0px 15px 10px 15px;
         line-height:18px;
       }
-      
+
       .more{
         display:block;
         float:right;
         margin:15px;
       }
-      
-    } // .about
-    
-  } // .home
-  
+
+    }
+  }
+
   //
   // PROFILE
   //
-  
+
   .profile {
     @include container($container-max-width);
     padding:0 0 40px;
-    
+
     > h2 {
       margin:10px;
     }
-    
+
     article {
       > h3 {
         margin:7px 0px 7px 0px;
         padding:10px 15px 10px 15px;
-        
+
         color: #fff;
-        
+
         //font-family: "Myriad Web Pro";
         font-family: Verdana, "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif; // ゴシック体
         font-weight: bold;
         @include font-size(20);
-        
+
         @include filter-gradient(#dda8a8, #dda8a8, horizontal); // IE6-9
         @include background-image(linear-gradient(left,  rgba(221,168,168,1) 0%,rgba(221,168,168,0) 100%));
       }
-      
+
       > p{
         color:#fff;
         font-size:12px;
@@ -433,116 +421,131 @@ $icon-sprite: get-sprite("icons");
         text-align:center;
       }
     }
-  } // .profile
-  
+  }
+
   //
   // PORTFOLIO
   //
-  
+
   .portfolio {
     @include container($container-max-width);
     padding:0 0 40px;
-    
+
     > h2 {
       display: none;
     }
-    
+
     .project-summary {
       > h3 {
-        
+
       }
-      
+
       ul {
         list-style:none;
       }
-      
+
       #works{
         .work {
           text-align: center;
-          
+
           li {
             display: inline-block;
-            width:250px; 
-            height:210px; 
-            margin:20px 20px 0; 
+            width:250px;
+            height:210px;
+            margin:20px 20px 0;
             text-align: left;
-            background:#fff; 
+            background:#fff;
           }
         }
-      } // #works
-      
-      > p {
-        
       }
-    } // .project-summary
-    
+
+      > p {
+
+      }
+    }
+
     .project-thumbnail {
       > img {
-        
+
       }
-    } // .project-thumbnail
-  } // .profile
-  
+    }
+  }
+
   //
   // CONTACT
   //
-  
-  .contact {
-      padding: 0 0 50px;
-      background-color: #ebdbdb;
-      
-/*     #main_image{
-      width:320px;
-      height:81px;
-      background:url(../images/contact/main.jpg) no-repeat;
-      display:block;
-      background-size: contain;
-      } */
 
-      @include background(
-      image-url('characters/contact.jpg') right top no-repeat,
+  .contact {
+    //padding: 0 0 50px;
+    background-color: #ebdbdb;
+
+    //#main_image{
+    //  width:320px;
+    //  height:81px;
+    //  background:url(../images/contact/main.jpg) no-repeat;
+    //  display:block;
+    //  background-size: contain;
+    //}
+
+    @include background(
+      image-url('characters/contact-mini.jpg') right top no-repeat,
       linear-gradient(to right, #ddabab, #ddabab) top no-repeat,
       image-url('labels/contact.png') 10px 91px no-repeat
     );
+
     @include background-size(auto 81px, 100% 81px, auto 47px);
     float:top;
-    
-    @include breakpoint($breakpoint-tablet) {
+
+    @include breakpoint($breakpoint-desktop) {
       min-height:817px;
-/*       padding: 140px 488px 10px 0; */
+      //padding: 140px 488px 10px 0;
       @include background(
         image-url('characters/contact.png') left no-repeat
-/*         image-url('labels/contact.png') left 40px no-repeat */
+        //image-url('labels/contact.png') left 40px no-repeat
       );
-      
-        
       @include background-size(817px 880px);
+      background-position: -122px bottom;
     }
+
     .contact-container{
       @include container($container-max-width);
-      padding-top: 150px;
-
-      @include background(
-      image-url('labels/contact.png') left 40px no-repeat
-      );
+      padding-top: 160px;
+      padding-bottom: 56px;
+      //@include background(
+      //  image-url('labels/contact.png') left 40px no-repeat
+      //);
      @include background-size(auto 87px);
+
+      @include breakpoint($breakpoint-desktop) {
+        padding-top: 100px;
+      }
     }
 
     .contact-detail {
-       padding:250px 20px 0 20px;
-       margin-bottom:150px;
-       @include background(image-url('contact-frame.png') center 150px no-repeat);
-       background-size: contain;
+      position: relative;
+      //padding:250px 20px 0 20px;
+      //margin-bottom:150px;
+      padding-top: 100%;
+      @include background(image-url('contact-frame.png') center no-repeat);
+      background-size: cover;
 
-      @include breakpoint($breakpoint-tablet) {
-       background-position: center 0px;
-       width:500px;
-       height:855px;
-       padding:170px 0px 0px 0;
-       margin-left:500px;
+      @include breakpoint($breakpoint-desktop) {
+        background-position: center 0px;
+        //width:500px;
+        //height:855px;
+        //padding:170px 0px 0px 0;
+        margin-left:500px;
+        height: 400px;
+        width: 400px;
+        padding: 0;
       }
-        
+
       > p{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        @include transform(translate(-50%, -50%));
+        width: 80%;
         color:#fff;
         font-size:12px;
         //margin:40px 15px 10px 15px;
@@ -551,9 +554,8 @@ $icon-sprite: get-sprite("icons");
         display:block;
       }
     }
-  } // .contact
-  
-} // #content
+  }
+}
 
 // =====================================
 // Footer
@@ -564,42 +566,42 @@ $icon-sprite: get-sprite("icons");
   right: 0;
   left: 0;
   bottom: 0;
-  
+
   height: 22px;
   @include breakpoint($breakpoint-desktop) {
     height: 44px;
   }
-  
+
   background: #c4a7a3;
-  
+
   .copyright {
     color: #ffffff;
     @include font-size(10);
     font-weight: normal;
     @include line-height(22);
     text-align: center;
-    
+
     @include breakpoint($breakpoint-desktop) {
       @include font-size(14);
       @include line-height(44);
     }
-  } // .copyright
-  
+  }
+
   .sns-links {
     list-style: none;
-    
+
     position: absolute;
     top: -(36px+15px);
     right: 5px;
-    
+
     @include breakpoint($breakpoint-desktop) {
       top: -((56px+20)/2);
     }
-    
+
     > li {
       display: inline-block;
     }
-    
+
     a {
       position: relative;
       display: block;
@@ -610,7 +612,7 @@ $icon-sprite: get-sprite("icons");
       height: 36px;
       margin: 5px;
       @include border-radius(36px/2);
-      
+
       @include breakpoint($breakpoint-desktop) {
         width: 56px;
         height: 56px;
@@ -621,7 +623,7 @@ $icon-sprite: get-sprite("icons");
       &.twitter {
         background-color: #55acef;
       }
-      
+
       &.facebook {
         background-color: #3c5a98;
       }
@@ -634,13 +636,12 @@ $icon-sprite: get-sprite("icons");
       }
 
       &.twitter:before {
-        @include sprite($icon-sprite, 'twitter', 1);
+        @include sprite($icon-sprite, 'twitter', 1.5);
       }
-      
+
       &.facebook:before {
-        @include sprite($icon-sprite, 'facebook', 1);
+        @include sprite($icon-sprite, 'facebook', 1.5);
       }
-    } // a
-  } // .sns-links
-  
-} // #footer
+    }
+  }
+}
