@@ -7,6 +7,7 @@ require 'breakpoint' # Help with writing media queries.
 # Set this to the root of your project when deployed:
 http_path = "/"
 http_images_path = "../images"
+http_generated_images_path = "../images"
 css_dir = "app/styles"
 sass_dir = "app/styles/sass"
 images_dir = "app/images"
