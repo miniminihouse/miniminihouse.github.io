@@ -22,7 +22,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
   $routeProvider.when('/contact', { templateUrl: 'views/contact.html' });
   $routeProvider.otherwise('/');
 
-  $locationProvider.html5Mode(true);
+  //$locationProvider.html5Mode(true);
 
 }]);
 
