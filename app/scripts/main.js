@@ -30,7 +30,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 //  Controllers
 //--------------------------------------
 
-app.controller('MainCtrl', ['$scope', '$document', '$window', '$timeout', 
+app.controller('MainCtrl', ['$scope', '$document', '$window', '$timeout',
   function($scope, $document, $window, $timeout) {
 
   var portfolioModalImage = $document[0].getElementsByClassName('portfolio-modal-image')[0];
@@ -55,12 +55,12 @@ app.controller('MainCtrl', ['$scope', '$document', '$window', '$timeout',
         portfolioModalImage.style.maxHeight = '100%';
         portfolioModalImage.style.bottom = '0';
       }
-      
+
       $scope.portfolioModalImage = this.src;
       $scope.portfolioModalShown = true;
       $scope.$apply();
     };
-    
+
     image.src = item.origin;
   };
 
@@ -70,7 +70,7 @@ app.controller('MainCtrl', ['$scope', '$document', '$window', '$timeout',
     $timeout(function() {
       $scope.portfolioModalImage = '';
       portfolioModalImage.src = '';
-    }, 200);
+    }, 300);
   };
 
   $scope.prevPortfolioImage = function($event) {
@@ -87,7 +87,7 @@ app.controller('MainCtrl', ['$scope', '$document', '$window', '$timeout',
 
     $timeout(function() {
       $scope.showPortfolioModal($scope.portfolioItems[prevIndex]);
-    }, 250);
+    }, 350);
   };
 
   $scope.nextPortfolioImage = function($event) {
@@ -101,11 +101,13 @@ app.controller('MainCtrl', ['$scope', '$document', '$window', '$timeout',
     }
 
     $scope.hidePortfolioModal();
-    
+
     $timeout(function() {
       $scope.showPortfolioModal($scope.portfolioItems[nextIndex]);
-    }, 250);
+    }, 350);
   };
+
+  var test = '../images/characters/home-mini.png';
 
   $scope.portfolioItems = [
     { thumb: 'images/portfolio/bahamut_1st_thum.png', origin: 'images/portfolio/bahamut_1st.jpg' },
@@ -128,9 +130,9 @@ app.controller('MainCtrl', ['$scope', '$document', '$window', '$timeout',
     { thumb: 'images/portfolio/point_thum.png', origin: 'images/portfolio/point.png' }
   ];
 
-  
 
-  
+
+
 
 }]);
 

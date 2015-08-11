@@ -173,8 +173,21 @@ module.exports = function(grunt) {
     },
 
     usemin: {
-      html: 'dist/**/*.html',
-      css: 'dist/styles/**/*.css'
+      html: ['dist/{,*/}*.html'],
+      css: ['dist/styles/{,*/}*.css'],
+      js: ['dist/scripts/{,*/}*.js'],
+      options: {
+        assetsDirs: [
+          'dist',
+          'dist/images',
+          'dist/styles'
+        ],
+        patterns: {
+          js: [
+            [/(images\/.*\.(png|jpg|gif|svg))/ig, 'Update the JS with the new image filenames']
+          ]
+        }
+      }
     },
 
     htmlmin: {
@@ -267,13 +280,10 @@ module.exports = function(grunt) {
       'ngtemplates',
       'concat',
       'cssmin',
-      'filerev:images',
-      'usemin:css',
       'uglify',
-      'filerev:styles',
-      'filerev:scripts',
-      'usemin:html',
-      'htmlmin:dist'
+      'filerev',
+      'usemin',
+      'htmlmin'
     ];
 
     grunt.task.run(tasks);

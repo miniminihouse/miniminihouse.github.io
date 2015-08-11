@@ -570,7 +570,7 @@ $icon-sprite: get-sprite("icons");
 .portfolio-modal {
   position: fixed;
   top: 0; right: 0; bottom: 0; left: 0;
-  background-color: rgba(0,0,0,0.8);
+  background-color: rgba(0,0,0,0.5);
   overflow: auto;
 
   //@include flexbox((
@@ -579,7 +579,7 @@ $icon-sprite: get-sprite("icons");
   //  justify-content: center
   //));
 
-  @include transition(opacity linear .2s);
+  @include transition(opacity linear .3s);
 
   &.ng-hide {
     opacity: 0;
@@ -595,16 +595,26 @@ $icon-sprite: get-sprite("icons");
     margin: auto;
   }
 
-  .prev-button {
+  .prev-button, .next-button {
     position: fixed;
-    top: 50%; left: 0;
+    top: 50%;
+    @include sprite($icon-sprite, 'arrow', 2);
+    border: none;
+    @include hide-text;
+
+    &.ng-click-active {
+      opacity: .5;
+    }
+  }
+
+  .prev-button {
+    left: 10px;
     @include transform(translateY(-50%));
   }
 
   .next-button {
-    position: fixed;
-    top: 50%; right: 0;
-    @include transform(translateY(-50%));
+    right: 10px;
+    @include transform(translateY(-50%) rotateZ(180deg));
   }
 }
 
