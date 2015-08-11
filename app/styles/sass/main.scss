@@ -436,6 +436,8 @@ $icon-sprite: get-sprite("icons");
     @include container($container-max-width);
     padding:0 0 40px;
 
+    @include user-select(none);
+
     > h2 {
       display: none;
     }
@@ -566,20 +568,18 @@ $icon-sprite: get-sprite("icons");
 }
 
 .portfolio-modal {
-  @include stretch;
   position: fixed;
-  background-color: rgba(0,0,0,0.5);
+  top: 0; right: 0; bottom: 0; left: 0;
+  background-color: rgba(0,0,0,0.8);
+  overflow: auto;
 
-/*   &.ng-hide-add, &.ng-hide-remove {
-    transition: 0s linear all;
-  }
+  //@include flexbox((
+  //  display: flex,
+  //  align-items: center,
+  //  justify-content: center
+  //));
 
-  &.ng-hide-add-active,
-  &.ng-hide-remove-active {
-    transition: 1s linear all;
-  } */
-
-  @include transition(opacity linear .3s);
+  @include transition(opacity linear .2s);
 
   &.ng-hide {
     opacity: 0;
@@ -587,9 +587,24 @@ $icon-sprite: get-sprite("icons");
 
 
   img {
-    @include stretch;
-    margin: auto;
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    display: block;
     max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+  }
+
+  .prev-button {
+    position: fixed;
+    top: 50%; left: 0;
+    @include transform(translateY(-50%));
+  }
+
+  .next-button {
+    position: fixed;
+    top: 50%; right: 0;
+    @include transform(translateY(-50%));
   }
 }
 
@@ -664,6 +679,10 @@ $icon-sprite: get-sprite("icons");
         background-color: #3c5a98;
       }
 
+      &.behance {
+        background-color: #131418;
+      }
+
       &:before {
         content: "";
         display: block;
@@ -677,6 +696,10 @@ $icon-sprite: get-sprite("icons");
 
       &.facebook:before {
         @include sprite($icon-sprite, 'facebook', 1.5);
+      }
+
+      &.behance:before {
+        @include sprite($icon-sprite, 'behance', 1.5);
       }
     }
   }

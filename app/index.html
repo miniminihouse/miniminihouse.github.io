@@ -92,14 +92,14 @@
 
           <ul class="sns-links">
             <li>
-              <a class="twitter" href="https://www.twitter.com/minhee.hayashi" target="_blank">
-                Twitter
+              <a class="behance" href="https://www.behance.net/miniminihouse" target="_blank">
+                Behance
               </a>
             </li><!--
+            
          --><li>
               <a class="facebook" href="https://www.facebook.com/minhee.hayashi" target="_bank">
                 Facebook
-<!--                 <span class="icon icon-facebook"> -->
               </a>
             </li>
           </ul>
@@ -110,7 +110,10 @@
       <div class="portfolio-modal ng-hide" 
            ng-show="portfolioModalShown"
            ng-click="hidePortfolioModal()">
-        <img ng-src="{{portfolioModalImage}}">
+        <img class="portfolio-modal-image" ng-src="{{portfolioModalImage}}">
+
+        <button class="prev-button" ng-click="prevPortfolioImage($event)">Prev</button>
+        <button class="next-button" ng-click="nextPortfolioImage($event)">Next</button>
       </div>
     </div>
     <!-- /container-->
