@@ -127,7 +127,8 @@ app.controller('MainCtrl', ['$scope', '$document', '$window', '$timeout',
     { thumb: 'images/portfolio/intro_thum.png', origin: 'images/portfolio/intro.jpg' },
     { thumb: 'images/portfolio/kencom_thum.png', origin: 'images/portfolio/kencom.jpg' },
     { thumb: 'images/portfolio/kisekae_thum.png', origin: 'images/portfolio/kisekae.png' },
-    { thumb: 'images/portfolio/point_thum.png', origin: 'images/portfolio/point.png' }
+    { thumb: 'images/portfolio/point_thum.png', origin: 'images/portfolio/point.png' },
+    { thumb: 'images/portfolio/arows_thum.png', origin: 'images/portfolio/arows.png' }
   ];
 
 
