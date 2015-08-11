@@ -1,14 +1,12 @@
 <section class="portfolio">
   <h2>PORTFOLIO</h2>
-  
+
   <div class="project-summary">
     <div id="works">
       <ul class="work">
-        <li ng-click="showPortfolioModal('images/portfolio/dot_room.jpg')"><img src="images/portfolio/thum_dot_room.jpg"></li>
-        <li ng-click="showPortfolioModal('images/portfolio/illust_001.jpg')"><img src="images/portfolio/thum_illust_001.jpg"></li>
-        <li ng-click="showPortfolioModal('images/portfolio/illust_002.jpg')"><img src="images/portfolio/thum_illust_002.jpg"></li>
-        <li ng-click="showPortfolioModal('images/portfolio/illust_003.jpg')"><img src="images/portfolio/thum_illust_003.jpg"></li>
-        <li ng-click="showPortfolioModal('images/portfolio/illust_004.jpg')"><img src="images/portfolio/thum_illust_004.jpg"></li>
+        <li ng-repeat="item in portfolioItems" ng-click="showPortfolioModal(item)">
+          <img ng-src="{{item.thumb}}">
+        </li>
       </ul>
     </div>
   </div>
