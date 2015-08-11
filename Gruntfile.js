@@ -184,7 +184,9 @@ module.exports = function(grunt) {
         ],
         patterns: {
           js: [
-            [/(images\/.*\.(png|jpg|gif|svg))/ig, 'Update the JS with the new image filenames']
+            // [/(images\/.*\.(png|jpg|gif|svg))/ig, 'Update the JS with the new image filenames']
+            // [/(images\/.*\.png)/ig, 'Update the JS with the new image filenames']
+            [/(images\/[\w/.@-]*\.(png|jpg|gif|svg))/ig, 'Update the JS with the new image filenames']
           ]
         }
       }
@@ -247,7 +249,31 @@ module.exports = function(grunt) {
         src: 'views/**/*.html',
         dest: '.tmp/scripts/templates.js'
       }
-    }
+    },
+
+    image: {
+      dist: {
+        options: {
+          pngquant: true,
+          optipng: true,
+          advpng: true,
+          zopflipng: true,
+          pngcrush: true,
+          pngout: true,
+          jpegtran: true,
+          jpegRecompress: true,
+          jpegoptim: true,
+          gifsicle: true,
+          svgo: true
+        },
+        files: [{
+          expand: true,
+          cwd: 'dist/images',
+          src: '**/*.{png,jpg,gif,svg}',
+          dest: 'dist/images',
+        }]
+      }
+    },
   });
 
   // Serve task.
@@ -276,6 +302,7 @@ module.exports = function(grunt) {
     var tasks = [
       'clean:dist',
       'copy:build',
+      // 'image',
       'useminPrepare',
       'ngtemplates',
       'concat',

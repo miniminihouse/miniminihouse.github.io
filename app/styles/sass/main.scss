@@ -398,6 +398,15 @@ $icon-sprite: get-sprite("icons");
     );
     @include background-size(auto 47px);
 
+    @include breakpoint($breakpoint-desktop) {
+      @include background(
+        image-url('labels/profile.png') 10px 10px no-repeat,
+        image-url('flower-left.png') left center no-repeat,
+        image-url('flower-right.png') right 110px no-repeat
+      );
+      @include background-size(auto, auto, auto);
+    }
+
     //> h2 {
     //  margin:10px;
     //}
@@ -414,8 +423,15 @@ $icon-sprite: get-sprite("icons");
         font-weight: bold;
         @include font-size(20);
 
-        @include filter-gradient(#dda8a8, #dda8a8, horizontal); // IE6-9
-        @include background-image(linear-gradient(left,  rgba(221,168,168,1) 0%,rgba(221,168,168,0) 100%));
+        //@include filter-gradient(#dda8a8, #dda8a8, horizontal); // IE6-9
+        @include background-image(linear-gradient(left, rgba(221,168,168,1) 0%,rgba(221,168,168,0) 100%));
+
+        @include breakpoint($breakpoint-desktop) {
+          text-align: center;
+          @include background-image(
+            linear-gradient(left, rgba(221,168,168,0) 0%, rgba(221,168,168,1) 50%, rgba(221,168,168,0) 100%)
+          );
+        }
       }
 
       > p{
@@ -507,27 +523,45 @@ $icon-sprite: get-sprite("icons");
     float:top;
 
     @include breakpoint($breakpoint-desktop) {
-      min-height:817px;
+      background: none;
+      //min-height:817px;
       //padding: 140px 488px 10px 0;
-      @include background(
-        image-url('characters/contact.png') left no-repeat
-        //image-url('labels/contact.png') left 40px no-repeat
-      );
-      @include background-size(817px 880px);
-      background-position: -122px bottom;
+      //@include background(
+      //  image-url('characters/contact.png') left bottom no-repeat,
+      //  image-url('labels/contact.png') left 40px no-repeat
+      //);
+      //@include background-size(817px 880px);
+      //background-position: left bottom;
     }
 
     .contact-container{
       @include container($container-max-width);
+      //@include clearfix;
       padding-top: 160px;
       padding-bottom: 56px;
       //@include background(
       //  image-url('labels/contact.png') left 40px no-repeat
       //);
-     @include background-size(auto 87px);
+      //@include background-size(auto 87px);
 
       @include breakpoint($breakpoint-desktop) {
         padding-top: 100px;
+        padding-bottom: 0;
+
+        @include background(
+          //image-url('characters/contact.png') left bottom no-repeat,
+          image-url('labels/contact.png') left 40px no-repeat
+        );
+
+        &:after {
+          content: "";
+          width: 336px;
+          height: 647px;
+          margin-top: -300px;
+          @include background(
+            image-url('characters/contact.png') left bottom no-repeat
+          );
+        }
       }
     }
 
@@ -690,7 +724,7 @@ $icon-sprite: get-sprite("icons");
       }
 
       &.behance {
-        background-color: #131418;
+        background-color: #1769ff;
       }
 
       &:before {
